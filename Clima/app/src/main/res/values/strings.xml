@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Clima</string>
     <string name="mis_ubicaciones">Mis Ubicaciones</string>
+    <string name="agregar_ubicacion">Agregar ubicación</string>
+    <string name="home">Home</string>
+    <string name="inicio">Inicio</string>
 </resources>
