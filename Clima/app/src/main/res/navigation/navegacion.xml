@@ -5,14 +5,14 @@
 
     <fragment
         android:id="@+id/nav_mis_ubicaciones"
-        android:name="com.dsl.clima.view.MisUbicacionesFragment"
+        android:name="com.dsl.clima.ui.MisUbicacionesFragment"
         android:label="@string/mis_ubicaciones" />
     <fragment
         android:id="@+id/nav_agregar_ubicacion"
-        android:name="com.dsl.clima.view.AgregarUbicacionFragment"
+        android:name="com.dsl.clima.ui.AgregarUbicacionFragment"
         android:label="@string/agregar_ubicacion" />
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.dsl.clima.view.HomeFragment"
+        android:name="com.dsl.clima.ui.HomeFragment"
         android:label="@string/home" />
 </navigation>

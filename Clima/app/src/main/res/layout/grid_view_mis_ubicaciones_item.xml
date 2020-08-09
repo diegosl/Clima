@@ -2,63 +2,103 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="pronostico"
+            type="com.dsl.clima.data.Pronostico" />
+        <import type="android.view.View"/>
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="16dp"
-        app:strokeColor="@color/colorGrayLight"
-        app:strokeWidth="1dp"
-        app:cardElevation="0dp">
-
+        android:layout_margin="8dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="8dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                tools:src="@tools:sample/backgrounds/scenic" />
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:cambiarColor="@{pronostico.condicion}"
+            tools:background="@drawable/degradado_celeste">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_ubicacion"
+                        app:tint="@color/colorWhite"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{pronostico.ubicacion}"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Villa Giardino, Córdoba Argentina" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_tiempo"
+                        app:tint="@color/colorWhite"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{pronostico.hora}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Lunes, 3 de Agosto" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{pronostico.temperatura}"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:textSize="50sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="27°" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginRight="8dp">
-
+                android:layout_margin="8dp"
+                android:gravity="center">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_sol"
+                    app:tint="@color/colorWhite"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorGray"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    tools:text="Ubicación" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/colorGray"
+                    android:text="@{pronostico.condicion}"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:layout_marginTop="8dp"
-                    tools:text="Temperatura actual" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="8dp"
-                    tools:text="Max/Min" />
+                    android:layout_gravity="center"
+                    tools:text="Soleado" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
