@@ -3,25 +3,26 @@ package com.dsl.clima.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dsl.clima.data.Pronostico
+import com.dsl.clima.api.apiService
+import com.dsl.clima.data.Ciudad
+import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MisUbicacionesViewModel : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _pronosticos = MutableLiveData<List<Pronostico>>()
-    val pronosticos: LiveData<List<Pronostico>>
-        get() = _pronosticos
+    private val _ciudades = MutableLiveData<List<Ciudad>>()
+    val ciudades: LiveData<List<Ciudad>>
+        get() = _ciudades
 
-    private val _pronosticoSeleccionado = MutableLiveData<Pronostico>()
-    val pronosticoSeleccionado: LiveData<Pronostico>
-        get() = _pronosticoSeleccionado
-
-    private val listaPronosticos = ArrayList<Pronostico>()
+    private val _estadoApi = MutableLiveData<EstadoApi>()
+    val estadoApi: LiveData<EstadoApi>
+        get() = _estadoApi
 
     /**
      * Inicializa el modelo de vista viewModel.
@@ -31,19 +32,18 @@ class MisUbicacionesViewModel : ViewModel() {
     }
 
     private fun getMisUbicaciones() {
-        listaPronosticos.add(Pronostico(1, "Villa Giardino, Córdoba Argentina", "Lunes 3 de Agosto", "27°", "", "Dia Despejado"))
-        listaPronosticos.add(Pronostico(2, "Capital, Córdoba Argentina", "Lunes 3 de Agosto", "20°", "", "Tarde Despejado"))
-        listaPronosticos.add(Pronostico(3, "Miami, Florida Estados Unidos", "Lunes 3 de Agosto", "21°", "", "Noche Despejado"))
-        listaPronosticos.add(Pronostico(4, "Tokio, Japan", "Martes 4 de Agosto", "10°", "", "Dia Nublado"))
-        _pronosticos.value = listaPronosticos
-    }
-
-    fun navegarPronosticoSeleccionado(pronostico: Pronostico) {
-        _pronosticoSeleccionado.value = pronostico
-    }
-
-    fun navegarPronosticoSeleccionadoCompletado() {
-        _pronosticoSeleccionado.value = null
+        coroutineScope.launch {
+            val getMisUbicacionesDeferred = apiService.retrofitService.getProducts("London")
+            try {
+                _estadoApi.value = EstadoApi.CARGANDO
+                val listResult = getMisUbicacionesDeferred.await()
+                _estadoApi.value = EstadoApi.FINALIZADO
+                _ciudades.value = listResult
+            } catch (e: Exception) {
+                _estadoApi.value = EstadoApi.ERROR
+                _ciudades.value = ArrayList()
+            }
+        }
     }
 
     /**

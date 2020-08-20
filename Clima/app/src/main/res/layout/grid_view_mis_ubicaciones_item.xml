@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="pronostico"
-            type="com.dsl.clima.data.Pronostico" />
+            name="ciudad"
+            type="com.dsl.clima.data.Ciudad" />
         <import type="android.view.View"/>
     </data>
 
@@ -14,14 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="18dp"
-        app:cardElevation="8dp">
+        app:cardElevation="0dp"
+        app:cardCornerRadius="16dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            app:cambiarColor="@{pronostico.condicion}"
-            tools:background="@drawable/degradado_celeste">
+            android:background="@color/colorPrimary">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -32,17 +31,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_ubicacion"
                         app:tint="@color/colorWhite"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{pronostico.ubicacion}"
+                        android:layout_gravity="center"
+                        android:text="@{ciudad.nombre}"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="12sp"
                         android:maxLines="1"
                         android:ellipsize="end"
                         tools:text="Villa Giardino, Córdoba Argentina" />
@@ -52,16 +53,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_tiempo"
                         app:tint="@color/colorWhite"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{pronostico.hora}"
+                        android:layout_gravity="center"
+                        android:text="@{ciudad.clima.main}"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         android:maxLines="1"
                         android:ellipsize="end"
                         tools:text="Lunes, 3 de Agosto" />
@@ -69,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{pronostico.temperatura}"
+                    android:text="@{ciudad.clima.icono}"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:textSize="50sp"
@@ -80,24 +83,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_margin="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_sol"
                     app:tint="@color/colorWhite"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{pronostico.condicion}"
+                    android:layout_gravity="center"
+                    android:text="@{ciudad.base}"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:layout_gravity="center"
                     tools:text="Soleado" />
             </LinearLayout>
         </LinearLayout>

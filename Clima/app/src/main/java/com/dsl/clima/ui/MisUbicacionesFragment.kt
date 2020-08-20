@@ -25,15 +25,8 @@ class MisUbicacionesFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.recyclerViewMisUbicaciones.adapter = MisUbicacionesAdapter(MisUbicacionesAdapter.OnClickListener {
-            viewModel.navegarPronosticoSeleccionado(it)
         })
 
-        viewModel.pronosticoSeleccionado.observe(this, Observer {
-            if ( null != it ) {
-                //this.findNavController().navigate(ProductFragmentDirections.actionProductFragmentToProductDetailFragment(it))
-                //viewModel.navigateSelectedProductCompleted()
-            }
-        })
         return binding.root
     }
 }

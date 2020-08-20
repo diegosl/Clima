@@ -1,14 +1,14 @@
 package com.dsl.clima.adapter
 
-import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dsl.clima.R
+import com.dsl.clima.data.Ciudad
 import com.dsl.clima.data.Pronostico
 
 @BindingAdapter("listaPronosticos")
-fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<Pronostico>?) {
+fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<Ciudad>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
     adapter.submitList(data)
 }

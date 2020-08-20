@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.dsl.clima.data.Ciudad
 import com.dsl.clima.data.Pronostico
 import com.dsl.clima.databinding.GridViewMisUbicacionesItemBinding
 
 class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<Pronostico,
+    ListAdapter<Ciudad,
             MisUbicacionesAdapter.MisUbicacionesViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MisUbicacionesViewHolder {
@@ -18,33 +19,33 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
     }
 
     override fun onBindViewHolder(holder: MisUbicacionesViewHolder, position: Int) {
-        val pronostico = getItem(position)
+        val ciudad = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(pronostico)
+            onClickListener.onClick(ciudad)
         }
-        holder.bind(pronostico)
+        holder.bind(ciudad)
     }
 
     class MisUbicacionesViewHolder(private var binding:
                                    GridViewMisUbicacionesItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(pronostico: Pronostico) {
-            binding.pronostico = pronostico
+        fun bind(ciudad: Ciudad) {
+            binding.ciudad = ciudad
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Pronostico>() {
-        override fun areItemsTheSame(oldItem: Pronostico, newItem: Pronostico): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Ciudad>() {
+        override fun areItemsTheSame(oldItem: Ciudad, newItem: Ciudad): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Pronostico, newItem: Pronostico): Boolean {
+        override fun areContentsTheSame(oldItem: Ciudad, newItem: Ciudad): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
-    class OnClickListener(val clickListener: (pronostico: Pronostico) -> Unit) {
-        fun onClick(pronostico: Pronostico) = clickListener(pronostico)
+    class OnClickListener(val clickListener: (ciudad: Ciudad) -> Unit) {
+        fun onClick(ciudad: Ciudad) = clickListener(ciudad)
     }
 }
