@@ -4,4 +4,6 @@
     <string name="agregar_ubicacion">Agregar ubicación</string>
     <string name="home">Home</string>
     <string name="inicio">Inicio</string>
+    <string name="search_hint">Buscar...</string>
+    <string name="search_hint_agregar_ubicacion">Buscar ubicación...</string>
 </resources>

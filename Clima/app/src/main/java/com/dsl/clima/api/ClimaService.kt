@@ -13,7 +13,11 @@ import retrofit2.http.Query
 /**
  * Se crea constante [BASE_URL] para contener la URL del web service
  */
-private const val BASE_URL = "api.openweathermap.org/data/2.5/"
+private const val BASE_URL = "http://api.openweathermap.org/data/2.5/"
+
+/**
+ * Se crea [API_KEY] para contener la KEY de la API Open Weather
+ */
 private const val API_KEY = "41176dfd0287c2f74238bb8996f5c104"
 
 /**
@@ -42,9 +46,14 @@ private val retrofit = Retrofit.Builder()
  */
 interface ClimaService {
     @GET("weather")
-    fun getProducts(@Query("q") cityName: String = "London",
+    fun getCiudades(@Query("q") cityName: String = "London",
                     @Query("appid") apiKey: String = API_KEY):
             Deferred<List<Ciudad>>
+
+    @GET("weather")
+    fun getCiudad(@Query("q") cityName: String = "London",
+                    @Query("appid") apiKey: String = API_KEY):
+            Deferred<Ciudad>
 }
 
 /**

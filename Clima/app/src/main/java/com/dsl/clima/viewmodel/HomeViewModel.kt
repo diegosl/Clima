@@ -11,14 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MisUbicacionesViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _ciudades = MutableLiveData<List<Ciudad>>()
-    val ciudades: LiveData<List<Ciudad>>
-        get() = _ciudades
+    private val _ciudad = MutableLiveData<Ciudad>()
+    val ciudad: LiveData<Ciudad>
+        get() = _ciudad
 
     private val _estadoApi = MutableLiveData<EstadoApi>()
     val estadoApi: LiveData<EstadoApi>
@@ -28,20 +28,20 @@ class MisUbicacionesViewModel : ViewModel() {
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        getMisUbicaciones()
+        getClima("Córdoba")
     }
 
-    private fun getMisUbicaciones() {
+    fun getClima(nombreCiudad: String) {
         coroutineScope.launch {
-            val getMisUbicacionesDeferred = apiService.retrofitService.getCiudades("London")
+            val getCiudadDeferred = apiService.retrofitService.getCiudad(nombreCiudad)
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
-                val listResult = getMisUbicacionesDeferred.await()
+                val result = getCiudadDeferred.await()
                 _estadoApi.value = EstadoApi.FINALIZADO
-                _ciudades.value = listResult
+                _ciudad.value = result
             } catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
-                _ciudades.value = ArrayList()
+                _ciudad.value = Ciudad()
             }
         }
     }
