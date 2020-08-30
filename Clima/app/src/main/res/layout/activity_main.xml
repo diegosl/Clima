@@ -24,7 +24,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
+                    android:background="?attr/colorPrimaryDark"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -50,6 +50,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
+            android:background="@drawable/degradado_gris_oscuro"
             app:menu="@menu/navigation_drawer_menu"
             app:itemIconTint="@drawable/drawer_selector"
             app:itemTextColor="@drawable/drawer_selector"/>

@@ -12,7 +12,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/degradado_gris_oscuro">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_home"
@@ -39,17 +40,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/degradado_celeste">
+                        android:orientation="vertical">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
                             android:orientation="vertical">
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_ubicacion"
                                 app:tint="@color/colorWhite"/>
@@ -63,40 +62,14 @@
                                 android:maxLines="1"
                                 android:text="@{viewModel.ciudad.nombre}"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="12sp"
+                                android:textSize="24sp"
                                 android:textStyle="bold"
-                                tools:text="Villa Giardino, Córdoba Argentina" />
+                                tools:text="Córdoba AR" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="16dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_gravity="center"
-                                app:imagenUrl="@{viewModel.ciudad.clima.get(0).icono}"
-                                tools:src="@drawable/ic_sol"
-                                tools:tint="@color/colorWhite" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                android:text="@{viewModel.ciudad.clima.get(0).descripcion}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="10sp"
-                                tools:text="Soleado" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_margin="8dp"
                             android:gravity="center"
                             android:orientation="horizontal">
 
@@ -109,8 +82,8 @@
                                 android:maxLines="1"
                                 app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMin}"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="30sp"
-                                tools:text="23°" />
+                                android:textSize="40sp"
+                                tools:text="15°" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -122,7 +95,7 @@
                                 android:maxLines="1"
                                 app:convertirTemperatura="@{viewModel.ciudad.pronostico.temp}"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="50sp"
+                                android:textSize="80sp"
                                 android:textStyle="bold"
                                 tools:text="27°" />
 
@@ -135,8 +108,35 @@
                                 android:maxLines="1"
                                 app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMax}"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="30sp"
+                                android:textSize="40sp"
                                 tools:text="30°" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_sol"
+                                app:tint="@color/colorAccent"
+                                tools:src="@drawable/ic_sol"
+                                tools:tint="@color/colorAccent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat"
+                                android:maxLines="1"
+                                android:text="@{viewModel.ciudad.clima.get(0).descripcion}"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp"
+                                tools:text="Soleado" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -145,8 +145,8 @@
                             android:layout_gravity="right"
                             android:orientation="horizontal">
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_tiempo"
                                 app:tint="@color/colorWhite"/>
@@ -160,8 +160,8 @@
                                 android:maxLines="1"
                                 android:text="@{String.valueOf(viewModel.ciudad.zonaHoraria)}"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="10sp"
-                                tools:text="Lunes, 3 de Agosto" />
+                                android:textSize="14sp"
+                                tools:text="28/8/2020" />
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -169,18 +169,20 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:gravity="center"
-                        android:layout_margin="16dp">
+                        android:layout_margin="16dp"
+                        android:background="@drawable/degradado_gris">
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
                             android:gravity="center"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_tiempo"
-                                app:tint="@color/colorGray"/>
+                                android:src="@drawable/ic_lluvia"
+                                app:tint="@color/colorAccent"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -190,9 +192,10 @@
                                 android:fontFamily="@font/montserrat"
                                 android:maxLines="1"
                                 android:text="@{String.valueOf(viewModel.ciudad.pronostico.presion)}"
-                                android:textColor="@color/colorGray"
-                                android:textSize="10sp"
-                                tools:text="10%" />
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:text="50 %" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -202,11 +205,11 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_notificacion"
-                                app:tint="@color/colorGray"/>
+                                android:src="@drawable/ic_viento"
+                                app:tint="@color/colorAccent"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -216,9 +219,10 @@
                                 android:fontFamily="@font/montserrat"
                                 android:maxLines="1"
                                 android:text="@{String.valueOf(viewModel.ciudad.pronostico.humedad)}"
-                                android:textColor="@color/colorGray"
-                                android:textSize="10sp"
-                                tools:text="50%" />
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:text="4.1 km/h" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -226,11 +230,11 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_sol"
-                                app:tint="@color/colorGray"/>
+                                android:src="@drawable/ic_humedad"
+                                app:tint="@color/colorAccent"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -240,9 +244,10 @@
                                 android:fontFamily="@font/montserrat"
                                 android:maxLines="1"
                                 android:text="6%"
-                                android:textColor="@color/colorGray"
-                                android:textSize="10sp"
-                                tools:text="6%" />
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:text="67 %" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -252,6 +257,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_agregar_ubicacion"
             style="@style/Widget.Design.FloatingActionButton"
+            android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"

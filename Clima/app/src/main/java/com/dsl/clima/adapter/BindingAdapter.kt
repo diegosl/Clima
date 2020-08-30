@@ -18,18 +18,6 @@ fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<Ciudad>?) 
     adapter.submitList(data)
 }
 
-@BindingAdapter("cambiarColor")
-fun bindCambiarColor(tarjeta: LinearLayout, condicion: String) {
-    when(condicion) {
-        "Dia Despejado" -> tarjeta.setBackgroundResource(R.drawable.degradado_celeste)
-        "Dia Nublado" -> tarjeta.setBackgroundResource(R.drawable.degradado_gris)
-        "Tarde Despejado" -> tarjeta.setBackgroundResource(R.drawable.degradado_naranja)
-        "Tarde Nublado" -> tarjeta.setBackgroundResource(R.drawable.degradado_gris)
-        "Noche Despejado" -> tarjeta.setBackgroundResource(R.drawable.degradado_azul)
-        "Tarde Nublado" -> tarjeta.setBackgroundResource(R.drawable.degradado_gris)
-    }
-}
-
 @BindingAdapter("convertirTemperatura")
 fun bindConvertirTemperatura(text: TextView, temperatura: Double) {
     text.text = convertirKelvinCelsius(temperatura)

@@ -21,6 +21,11 @@ private const val BASE_URL = "http://api.openweathermap.org/data/2.5/"
 private const val API_KEY = "41176dfd0287c2f74238bb8996f5c104"
 
 /**
+ * Se crea [LANGUAGE] para contener el IDIOMA de la API Open Weather
+ */
+private const val LANGUAGE = "sp"
+
+/**
  * Se construye un objeto [moshi].
  */
 private val moshi = Moshi.Builder()
@@ -46,12 +51,14 @@ private val retrofit = Retrofit.Builder()
  */
 interface ClimaService {
     @GET("weather")
-    fun getCiudades(@Query("q") cityName: String = "London",
+    fun getCiudades(@Query("q") cityName: String = "Cordoba",
+                    @Query("lang") idioma: String = LANGUAGE,
                     @Query("appid") apiKey: String = API_KEY):
             Deferred<List<Ciudad>>
 
     @GET("weather")
-    fun getCiudad(@Query("q") cityName: String = "London",
+    fun getCiudad(@Query("q") cityName: String = "Cordoba",
+                  @Query("lang") idioma: String = LANGUAGE,
                     @Query("appid") apiKey: String = API_KEY):
             Deferred<Ciudad>
 }
