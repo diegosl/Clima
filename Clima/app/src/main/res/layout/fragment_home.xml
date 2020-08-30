@@ -39,130 +39,125 @@
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
                         android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:orientation="vertical">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_ubicacion"
-                                app:tint="@color/colorWhite"/>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_ubicacion"
+                            app:tint="@color/colorWhite"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                android:text="@{viewModel.ciudad.nombre}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="24sp"
-                                android:textStyle="bold"
-                                tools:text="Córdoba AR" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMin}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="40sp"
-                                tools:text="15°" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_margin="8dp"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                app:convertirTemperatura="@{viewModel.ciudad.pronostico.temp}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="80sp"
-                                android:textStyle="bold"
-                                tools:text="27°" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMax}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="40sp"
-                                tools:text="30°" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_sol"
-                                app:tint="@color/colorAccent"
-                                tools:src="@drawable/ic_sol"
-                                tools:tint="@color/colorAccent" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                android:text="@{viewModel.ciudad.clima.get(0).descripcion}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="14sp"
-                                tools:text="Soleado" />
-                        </LinearLayout>
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_gravity="right"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_tiempo"
-                                app:tint="@color/colorWhite"/>
+                            android:layout_gravity="center"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            android:text="@{viewModel.ciudad.nombre}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="Córdoba AR" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/montserrat"
-                                android:maxLines="1"
-                                android:text="@{String.valueOf(viewModel.ciudad.zonaHoraria)}"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="14sp"
-                                tools:text="28/8/2020" />
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMin}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="40sp"
+                            tools:text="15°" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            app:convertirTemperatura="@{viewModel.ciudad.pronostico.temp}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="80sp"
+                            android:textStyle="bold"
+                            tools:text="27°" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            app:convertirTemperatura="@{viewModel.ciudad.pronostico.tempMax}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="40sp"
+                            tools:text="30°" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_sol"
+                            app:tint="@color/colorAccent"
+                            tools:src="@drawable/ic_sol"
+                            tools:tint="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            android:text="@{viewModel.ciudad.clima.get(0).descripcion}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="14sp"
+                            tools:text="Soleado" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_tiempo"
+                            app:tint="@color/colorWhite"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            android:text="@{String.valueOf(viewModel.ciudad.zonaHoraria)}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="14sp"
+                            tools:text="28/8/2020" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
