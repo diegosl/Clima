@@ -1,5 +1,6 @@
 package com.dsl.clima
 
+import com.dsl.clima.data.Ciudad
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,5 +14,11 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun clima_build() {
+        val ciudad = Ciudad()
+        assertEquals(ciudad.nombre, "")
     }
 }
