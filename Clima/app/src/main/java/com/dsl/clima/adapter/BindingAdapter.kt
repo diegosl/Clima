@@ -1,23 +1,23 @@
 package com.dsl.clima.adapter
 
+import android.util.Log
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.dsl.clima.R
 import com.dsl.clima.data.Ciudad
-import com.dsl.clima.util.convertirKelvinCelsius
-import com.dsl.clima.util.convertirPorcentaje
-import com.dsl.clima.util.convertirVelocidad
-import java.text.DateFormat
+import com.dsl.clima.util.*
 
 @BindingAdapter("listaPronosticos")
 fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<Ciudad>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("unirCiudad", "unirPais")
+fun bindUnirCiudadPais(text: TextView, ciudad: String?, pais: String?) {
+    text.text = ciudad?.let { pais?.let { it1 -> unirCiudadPais(it, it1) } }
 }
 
 @BindingAdapter("convertirTemperatura")
@@ -35,8 +35,13 @@ fun bindConvertirVelocidad(text: TextView, velocidad: Double) {
     text.text = convertirVelocidad(velocidad)
 }
 
-@BindingAdapter("imagenUrl")
-fun bindImagenUrl(imgView: ImageView, imgUrl: String) {
+@BindingAdapter("convertirFecha")
+fun bindConvertirFecha(text: TextView, tiempo: Int) {
+    text.text = convertirFecha(tiempo)
+}
+
+@BindingAdapter("imageUrl")
+fun bindImageUrl(imgView: ImageView, imgUrl: String?) {
     val imgUri = "http://openweathermap.org/img/wn/${imgUrl}@2x.png"
-    Glide.with(imgView.context).load(imgUri).into(imgView)
+    Glide.with(imgView).load(imgUri).into(imgView)
 }

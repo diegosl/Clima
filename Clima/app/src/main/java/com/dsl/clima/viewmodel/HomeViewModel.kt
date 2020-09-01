@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.api.apiService
 import com.dsl.clima.data.Ciudad
+import com.dsl.clima.data.Clima
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

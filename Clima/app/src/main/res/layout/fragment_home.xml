@@ -56,10 +56,11 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/montserrat"
                             android:maxLines="1"
-                            android:text="@{viewModel.ciudad.nombre}"
                             android:textColor="@color/colorWhite"
                             android:textSize="24sp"
                             android:textStyle="bold"
+                            app:unirCiudad="@{viewModel.ciudad.nombre}"
+                            app:unirPais="@{viewModel.ciudad.sys.pais}"
                             tools:text="Córdoba AR" />
                     </LinearLayout>
                     <LinearLayout
@@ -113,12 +114,12 @@
                         android:layout_margin="8dp"
                         android:gravity="center"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_sol"
-                            android:tint="@color/colorAccent"
+                            app:imageUrl="@{viewModel.ciudad.clima.get(0).icono}"
                             tools:src="@drawable/ic_sol"
                             tools:tint="@color/colorAccent" />
 
@@ -140,11 +141,11 @@
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:layout_margin="16dp"
+                        android:padding="8dp"
                         android:background="@drawable/degradado_gris">
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
                             android:gravity="center"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
@@ -170,9 +171,9 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_marginLeft="64dp"
                             android:layout_marginRight="64dp"
-                            android:gravity="center"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="20dp"
@@ -197,7 +198,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:orientation="vertical">
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="20dp"
@@ -241,7 +242,7 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/montserrat"
                             android:maxLines="1"
-                            android:text="@{String.valueOf(viewModel.ciudad.fecha)}"
+                            app:convertirFecha="@{viewModel.ciudad.fecha}"
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp"
                             tools:text="28/8/2020 22:37:10" />

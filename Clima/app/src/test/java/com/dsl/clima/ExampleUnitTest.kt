@@ -20,5 +20,6 @@ class ExampleUnitTest {
     fun clima_build() {
         val ciudad = Ciudad()
         assertEquals(ciudad.nombre, "")
+        assertEquals(ciudad.clima[0].descripcion, "")
     }
 }
