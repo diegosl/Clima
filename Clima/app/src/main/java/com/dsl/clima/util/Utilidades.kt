@@ -17,7 +17,7 @@ fun unirCiudadPais(ciudad: String, pais: String) = "$ciudad $pais"
 
 fun convertirKelvinCelsius(kelvin: Double) = "${(kelvin-273.15).roundToInt()}°"
 
-fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()} %"
+fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()}%"
 
 fun convertirVelocidad(velocidad: Double) = "$velocidad m/s"
 
@@ -48,9 +48,7 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
             animatorSetAlpha.play(animatorAlpha)
             animatorSetAlpha.start()
 
-            Snackbar.make(view, "Comprobar la conexión de red", Snackbar.LENGTH_LONG)
-                .setBackgroundTint(R.color.colorPurple)
-                .show()
+            Snackbar.make(view, "Comprobar la conexión de red", Snackbar.LENGTH_LONG).show()
         }
         EstadoApi.FINALIZADO -> {
             swipeRefreshLayout.isRefreshing = false

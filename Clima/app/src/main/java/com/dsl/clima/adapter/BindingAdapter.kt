@@ -1,6 +1,5 @@
 package com.dsl.clima.adapter
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

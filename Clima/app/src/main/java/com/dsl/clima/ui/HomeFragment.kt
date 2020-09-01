@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.fabAgregarUbicacion.setOnClickListener {
-            this.findNavController().navigate(R.layout.fragment_agregar_ubicacion)
+            this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavAgregarUbicacion())
         }
 
         /**
