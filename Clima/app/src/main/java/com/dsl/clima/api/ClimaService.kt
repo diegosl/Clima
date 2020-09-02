@@ -1,6 +1,7 @@
 package com.dsl.clima.api
 
-import com.dsl.clima.data.Ciudad
+import com.dsl.clima.data.DatosMeteorologicosActuales
+import com.dsl.clima.data.DatosMeteorologicosActualesPrevistos
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -26,6 +27,11 @@ private const val API_KEY = "41176dfd0287c2f74238bb8996f5c104"
 private const val LANGUAGE = "sp"
 
 /**
+ * Se crea [CELSIUS] para indicar la temperatura en Celsius de la API Open Weather
+ */
+private const val CELSIUS = "metric"
+
+/**
  * Se construye un objeto [moshi].
  */
 private val moshi = Moshi.Builder()
@@ -43,7 +49,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 /**
- * La interfaz [ApiService] contiene los metodos para consultar las diferentes peticiones
+ * La interfaz [ClimaService] contiene los metodos para consultar las diferentes peticiones
  * al web service.
  *
  * @author Sosa Ludueña Diego
@@ -51,16 +57,24 @@ private val retrofit = Retrofit.Builder()
  */
 interface ClimaService {
     @GET("weather")
-    fun getCiudades(@Query("q") cityName: String = "Cordoba",
-                    @Query("lang") idioma: String = LANGUAGE,
-                    @Query("appid") apiKey: String = API_KEY):
-            Deferred<List<Ciudad>>
+    fun getListaDatosMeteorologicosActuales(@Query("q") cityName: String = "Cordoba",
+                                            @Query("lang") idioma: String = LANGUAGE,
+                                            @Query("appid") apiKey: String = API_KEY):
+            Deferred<List<DatosMeteorologicosActuales>>
 
     @GET("weather")
-    fun getCiudad(@Query("q") cityName: String = "Cordoba",
-                  @Query("lang") idioma: String = LANGUAGE,
-                    @Query("appid") apiKey: String = API_KEY):
-            Deferred<Ciudad>
+    fun getDatosMeteorologicosActuales(@Query("q") cityName: String = "Cordoba",
+                                       @Query("lang") idioma: String = LANGUAGE,
+                                       @Query("appid") apiKey: String = API_KEY):
+            Deferred<DatosMeteorologicosActuales>
+
+    @GET("onecall")
+    fun getDatosMeteorologicosActualesPrevistos(@Query("lat") latitud: Double = 0.0,
+                                                @Query("lon") longitud: Double = 0.0,
+                                                @Query("units") unidad: String = CELSIUS,
+                                                @Query("lang") idioma: String = LANGUAGE,
+                                                @Query("appid") apiKey: String = API_KEY):
+            Deferred<DatosMeteorologicosActualesPrevistos>
 }
 
 /**

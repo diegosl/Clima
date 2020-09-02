@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="ciudad"
-            type="com.dsl.clima.data.Ciudad" />
+            name="datosMeteorologicosActuales"
+            type="com.dsl.clima.data.DatosMeteorologicosActuales" />
         <import type="android.view.View"/>
     </data>
 
@@ -40,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@{ciudad.nombre}"
+                        android:text="@{datosMeteorologicosActuales.ciudad}"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"
                         android:textSize="12sp"
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{ciudad.clima.get(0).descripcion}"
+                    android:text="Soleado"
                     android:textColor="@color/colorWhite"
                     android:textSize="10sp"
                     android:maxLines="1"

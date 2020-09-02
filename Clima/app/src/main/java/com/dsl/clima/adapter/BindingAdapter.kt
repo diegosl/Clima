@@ -5,11 +5,11 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dsl.clima.data.Ciudad
+import com.dsl.clima.data.DatosMeteorologicosActuales
 import com.dsl.clima.util.*
 
 @BindingAdapter("listaPronosticos")
-fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<Ciudad>?) {
+fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<DatosMeteorologicosActuales>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
     adapter.submitList(data)
 }
@@ -21,7 +21,7 @@ fun bindUnirCiudadPais(text: TextView, ciudad: String?, pais: String?) {
 
 @BindingAdapter("convertirTemperatura")
 fun bindConvertirTemperatura(text: TextView, temperatura: Double) {
-    text.text = convertirKelvinCelsius(temperatura)
+    text.text = convertirGrado(temperatura)
 }
 
 @BindingAdapter("convertirPorcentaje")

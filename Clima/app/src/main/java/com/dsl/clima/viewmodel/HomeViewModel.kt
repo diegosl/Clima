@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.api.apiService
-import com.dsl.clima.data.Ciudad
-import com.dsl.clima.data.Clima
+import com.dsl.clima.data.DatosMeteorologicosActuales
+import com.dsl.clima.data.DatosMeteorologicosActualesPrevistos
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +17,13 @@ class HomeViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _ciudad = MutableLiveData<Ciudad>()
-    val ciudad: LiveData<Ciudad>
-        get() = _ciudad
+    private val _datosMeteorologicosActuales = MutableLiveData<DatosMeteorologicosActuales>()
+    val datosMeteorologicosActuales: LiveData<DatosMeteorologicosActuales>
+        get() = _datosMeteorologicosActuales
+
+    private val _datosMeteorologicosActualesPrevistos = MutableLiveData<DatosMeteorologicosActualesPrevistos>()
+    val datosMeteorologicosActualesPrevistos: LiveData<DatosMeteorologicosActualesPrevistos>
+        get() = _datosMeteorologicosActualesPrevistos
 
     private val _estadoApi = MutableLiveData<EstadoApi>()
     val estadoApi: LiveData<EstadoApi>
@@ -29,20 +33,26 @@ class HomeViewModel : ViewModel() {
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        getClima("Córdoba")
+       getClima("Cordoba")
     }
 
-    fun getClima(nombreCiudad: String) {
+    fun getClima(ciudad: String) {
         coroutineScope.launch {
-            val getCiudadDeferred = apiService.retrofitService.getCiudad(nombreCiudad)
+            val getDatosMeteorologicosActualesDeferred = apiService.retrofitService.getDatosMeteorologicosActuales(ciudad)
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
-                val result = getCiudadDeferred.await()
+                val result_1 = getDatosMeteorologicosActualesDeferred.await()
+                val getDatosMeteorologicosActualesPrevistosDeferred = apiService.retrofitService.getDatosMeteorologicosActualesPrevistos(
+                    result_1.coordenadaCiudad.latitud, result_1.coordenadaCiudad.longitud
+                )
+                val result_2 = getDatosMeteorologicosActualesPrevistosDeferred.await()
                 _estadoApi.value = EstadoApi.FINALIZADO
-                _ciudad.value = result
+                _datosMeteorologicosActuales.value = result_1
+                _datosMeteorologicosActualesPrevistos.value = result_2
             } catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
-                _ciudad.value = Ciudad()
+                _datosMeteorologicosActuales.value = DatosMeteorologicosActuales()
+                _datosMeteorologicosActualesPrevistos.value = DatosMeteorologicosActualesPrevistos()
             }
         }
     }

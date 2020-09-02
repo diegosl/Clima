@@ -1,6 +1,5 @@
 package com.dsl.clima
 
-import com.dsl.clima.data.Ciudad
 import org.junit.Test
 
 import org.junit.Assert.*

@@ -15,7 +15,7 @@ enum class EstadoApi { CARGANDO, ERROR, FINALIZADO }
 
 fun unirCiudadPais(ciudad: String, pais: String) = "$ciudad $pais"
 
-fun convertirKelvinCelsius(kelvin: Double) = "${(kelvin-273.15).roundToInt()}°"
+fun convertirGrado(temperatura: Double) = "${temperatura.roundToInt()}°"
 
 fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()}%"
 

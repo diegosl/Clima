@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.api.apiService
-import com.dsl.clima.data.Ciudad
+import com.dsl.clima.data.DatosMeteorologicosActuales
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +16,8 @@ class MisUbicacionesViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _ciudades = MutableLiveData<List<Ciudad>>()
-    val ciudades: LiveData<List<Ciudad>>
+    private val _ciudades = MutableLiveData<List<DatosMeteorologicosActuales>>()
+    val ciudades: LiveData<List<DatosMeteorologicosActuales>>
         get() = _ciudades
 
     private val _estadoApi = MutableLiveData<EstadoApi>()
@@ -33,7 +33,7 @@ class MisUbicacionesViewModel : ViewModel() {
 
     private fun getMisUbicaciones() {
         coroutineScope.launch {
-            val getMisUbicacionesDeferred = apiService.retrofitService.getCiudades("London")
+            val getMisUbicacionesDeferred = apiService.retrofitService.getListaDatosMeteorologicosActuales("London")
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
                 val listResult = getMisUbicacionesDeferred.await()

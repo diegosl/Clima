@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dsl.clima.data.Ciudad
-import com.dsl.clima.data.Pronostico
+import com.dsl.clima.data.DatosMeteorologicosActuales
 import com.dsl.clima.databinding.GridViewMisUbicacionesItemBinding
 
 class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<Ciudad,
+    ListAdapter<DatosMeteorologicosActuales,
             MisUbicacionesAdapter.MisUbicacionesViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MisUbicacionesViewHolder {
@@ -19,33 +18,33 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
     }
 
     override fun onBindViewHolder(holder: MisUbicacionesViewHolder, position: Int) {
-        val ciudad = getItem(position)
+        val datosMeteorologicosActuales = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(ciudad)
+            onClickListener.onClick(datosMeteorologicosActuales)
         }
-        holder.bind(ciudad)
+        holder.bind(datosMeteorologicosActuales)
     }
 
     class MisUbicacionesViewHolder(private var binding:
                                    GridViewMisUbicacionesItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(ciudad: Ciudad) {
-            binding.ciudad = ciudad
+        fun bind(datosMeteorologicosActuales: DatosMeteorologicosActuales) {
+            binding.datosMeteorologicosActuales = datosMeteorologicosActuales
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Ciudad>() {
-        override fun areItemsTheSame(oldItem: Ciudad, newItem: Ciudad): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<DatosMeteorologicosActuales>() {
+        override fun areItemsTheSame(oldItem: DatosMeteorologicosActuales, newItem: DatosMeteorologicosActuales): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Ciudad, newItem: Ciudad): Boolean {
+        override fun areContentsTheSame(oldItem: DatosMeteorologicosActuales, newItem: DatosMeteorologicosActuales): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
-    class OnClickListener(val clickListener: (ciudad: Ciudad) -> Unit) {
-        fun onClick(ciudad: Ciudad) = clickListener(ciudad)
+    class OnClickListener(val clickListener: (datosMeteorologicosActuales: DatosMeteorologicosActuales) -> Unit) {
+        fun onClick(datosMeteorologicosActuales: DatosMeteorologicosActuales) = clickListener(datosMeteorologicosActuales)
     }
 }
