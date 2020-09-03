@@ -35,11 +35,11 @@
                 <LinearLayout
                     android:id="@+id/layout_home"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:orientation="vertical">
                         <ImageView
@@ -65,7 +65,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -78,7 +78,7 @@
                             android:fontFamily="@font/montserrat"
                             android:maxLines="1"
                             app:convertirTemperatura="@{viewModel.datosMeteorologicosActualesPrevistos.climaDiario.get(0).temperatura.tempMin}"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorBlanco"
                             android:textSize="40sp"
                             tools:text="15°" />
 
@@ -104,20 +104,20 @@
                             android:fontFamily="@font/montserrat"
                             android:maxLines="1"
                             app:convertirTemperatura="@{viewModel.datosMeteorologicosActualesPrevistos.climaDiario.get(0).temperatura.tempMax}"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorBlanco"
                             android:textSize="40sp"
                             tools:text="30°" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="center"
                             app:imageUrl="@{viewModel.datosMeteorologicosActualesPrevistos.climaActual.clima.get(0).icono}"
                             tools:src="@drawable/ic_sol"
@@ -137,7 +137,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:layout_margin="16dp"
@@ -246,6 +246,29 @@
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp"
                             tools:text="28/8/2020 22:37:10" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_margin="16dp"
+                        android:padding="8dp"
+                        android:background="@drawable/degradado_gris">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:paddingLeft="16dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            app:convertirFecha="@{viewModel.datosMeteorologicosActualesPrevistos.climaActual.fecha}"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            tools:text="Pronostico extendido" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

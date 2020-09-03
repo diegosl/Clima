@@ -15,10 +15,6 @@
             android:id="@+id/nav_agregar_ubicacion"
             android:icon="@drawable/ic_ubicacion"
             android:title="@string/agregar_ubicacion" />
-        <item
-            android:id="@+id/nav_notificacion"
-            android:icon="@drawable/ic_notificacion"
-            android:title="Notificaciones" />
     </group>
     <group
         android:id="@+id/group_2">
