@@ -7,4 +7,5 @@
     <string name="search_hint">Buscar...</string>
     <string name="search_hint_agregar_ubicacion">Buscar ubicación...</string>
     <string name="error_internet">Comprobar la conexión de red</string>
+    <string name="pronostico_extendido">Pronostico extendido</string>
 </resources>

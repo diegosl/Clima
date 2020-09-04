@@ -6,7 +6,7 @@
     <data>
         <variable
             name="datosMeteorologicosActuales"
-            type="com.dsl.clima.data.DatosMeteorologicosActuales" />
+            type="com.dsl.clima.domain.DatosMeteorologicosActuales" />
         <import type="android.view.View"/>
     </data>
 

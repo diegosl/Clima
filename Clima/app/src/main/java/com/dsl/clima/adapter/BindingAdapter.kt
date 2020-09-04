@@ -5,8 +5,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dsl.clima.data.ClimaDiario
-import com.dsl.clima.data.DatosMeteorologicosActuales
+import com.dsl.clima.domain.ClimaDiario
+import com.dsl.clima.domain.DatosMeteorologicosActuales
 import com.dsl.clima.util.*
 
 @BindingAdapter("listaPronosticos")

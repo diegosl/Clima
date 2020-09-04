@@ -6,50 +6,50 @@
     <data>
         <variable
             name="climaDiario"
-            type="com.dsl.clima.data.ClimaDiario" />
+            type="com.dsl.clima.domain.ClimaDiario" />
         <import type="android.view.View"/>
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="8dp">
+        android:padding="8dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:gravity="center"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:textColor="@color/colorWhite"
-            app:convertirDia="@{climaDiario.fecha}"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textSize="12sp"
+            app:convertirDia="@{climaDiario.fecha}"
             tools:text="Lunes" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             app:imageUrl="@{climaDiario.clima.get(0).icono}"
-            tools:src="@drawable/ic_viento"
-            tools:tint="@color/colorAccent"/>
+            tools:src="@drawable/ic_lluvia"
+            tools:tint="@color/colorAccent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:gravity="center"
             android:ellipsize="end"
-            android:gravity="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:textColor="@color/colorWhite"
-            app:convertirTemperaturaMin="@{climaDiario.temperatura.tempMin}"
-            app:convertirTemperaturaMax="@{climaDiario.temperatura.tempMax}"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textSize="12sp"
+            app:convertirTemperaturaMax="@{climaDiario.temperatura.tempMax}"
+            app:convertirTemperaturaMin="@{climaDiario.temperatura.tempMin}"
             tools:text="12°/25°" />
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

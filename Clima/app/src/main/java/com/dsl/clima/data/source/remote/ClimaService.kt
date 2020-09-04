@@ -1,7 +1,7 @@
-package com.dsl.clima.api
+package com.dsl.clima.data.source.remote
 
-import com.dsl.clima.data.DatosMeteorologicosActuales
-import com.dsl.clima.data.DatosMeteorologicosActualesPrevistos
+import com.dsl.clima.domain.DatosMeteorologicosActuales
+import com.dsl.clima.domain.DatosMeteorologicosActualesPrevistos
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dsl.clima.data.ClimaDiario
+import com.dsl.clima.domain.ClimaDiario
 import com.dsl.clima.databinding.PronosticoExtendidoItemBinding
 
 class PronosticoExtendidoAdapter( private val onClickListener: OnClickListener ) :

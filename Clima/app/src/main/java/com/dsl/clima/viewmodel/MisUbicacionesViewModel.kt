@@ -3,8 +3,8 @@ package com.dsl.clima.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dsl.clima.api.apiService
-import com.dsl.clima.data.DatosMeteorologicosActuales
+import com.dsl.clima.data.source.remote.apiService
+import com.dsl.clima.domain.DatosMeteorologicosActuales
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

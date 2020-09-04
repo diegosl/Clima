@@ -236,8 +236,8 @@
                             android:paddingBottom="8dp"
                             android:fontFamily="@font/montserrat"
                             android:maxLines="1"
-                            android:text="Pronostico extendido"
-                            android:textColor="@color/colorWhite"
+                            android:text="@string/pronostico_extendido"
+                            android:textColor="@color/colorBlanco"
                             android:textStyle="bold"
                             android:textSize="24sp"
                             tools:text="Pronostico extendido" />
