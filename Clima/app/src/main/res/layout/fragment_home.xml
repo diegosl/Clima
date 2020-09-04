@@ -222,6 +222,38 @@
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_margin="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ellipsize="end"
+                            android:paddingBottom="8dp"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            android:text="Pronostico extendido"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            tools:text="Pronostico extendido" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_pronostico_extendido"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/degradado_gris"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="1"
+                            app:listaPronosticoExtendido="@{viewModel.datosMeteorologicosActualesPrevistos.climaDiario}"
+                            tools:itemCount="7"
+                            tools:listitem="@layout/pronostico_extendido_item"/>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
@@ -246,29 +278,6 @@
                             android:textColor="@color/colorWhite"
                             android:textSize="12sp"
                             tools:text="28/8/2020 22:37:10" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_margin="16dp"
-                        android:padding="8dp"
-                        android:background="@drawable/degradado_gris">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:paddingLeft="16dp"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/montserrat"
-                            android:maxLines="1"
-                            app:convertirFecha="@{viewModel.datosMeteorologicosActualesPrevistos.climaActual.fecha}"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            tools:text="Pronostico extendido" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

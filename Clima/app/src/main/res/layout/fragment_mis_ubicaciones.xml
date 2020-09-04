@@ -22,6 +22,6 @@
             app:spanCount="1"
             app:listaPronosticos="@{viewModel.ciudades}"
             tools:itemCount="4"
-            tools:listitem="@layout/grid_view_mis_ubicaciones_item"/>
+            tools:listitem="@layout/mis_ubicaciones_item"/>
     </LinearLayout>
 </layout>

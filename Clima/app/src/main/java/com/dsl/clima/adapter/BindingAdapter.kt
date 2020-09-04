@@ -5,12 +5,19 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dsl.clima.data.ClimaDiario
 import com.dsl.clima.data.DatosMeteorologicosActuales
 import com.dsl.clima.util.*
 
 @BindingAdapter("listaPronosticos")
 fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<DatosMeteorologicosActuales>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listaPronosticoExtendido")
+fun bindRecyclerViewPronosticoExtendido(recyclerView: RecyclerView, data: List<ClimaDiario>?) {
+    val adapter = recyclerView.adapter as PronosticoExtendidoAdapter
     adapter.submitList(data)
 }
 
@@ -22,6 +29,11 @@ fun bindUnirCiudadPais(text: TextView, ciudad: String?, pais: String?) {
 @BindingAdapter("convertirTemperatura")
 fun bindConvertirTemperatura(text: TextView, temperatura: Double) {
     text.text = convertirGrado(temperatura)
+}
+
+@BindingAdapter("convertirTemperaturaMin", "convertirTemperaturaMax")
+fun bindConvertirTemperaturaMinMax(text: TextView, tempMin: Double?, tempMax: Double?) {
+    text.text = tempMin?.let { tempMax?.let { it1 -> convertirTempMinMax(it, it1) } }
 }
 
 @BindingAdapter("convertirPorcentaje")
@@ -37,6 +49,11 @@ fun bindConvertirVelocidad(text: TextView, velocidad: Double) {
 @BindingAdapter("convertirFecha")
 fun bindConvertirFecha(text: TextView, tiempo: Int) {
     text.text = convertirFecha(tiempo)
+}
+
+@BindingAdapter("convertirDia")
+fun bindConvertirDia(text: TextView, tiempo: Int) {
+    text.text = convertirDia(tiempo)
 }
 
 @BindingAdapter("imageUrl")

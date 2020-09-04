@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="climaDiario"
+            type="com.dsl.clima.data.ClimaDiario" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1"
+            android:textColor="@color/colorWhite"
+            app:convertirDia="@{climaDiario.fecha}"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            tools:text="Lunes" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:imageUrl="@{climaDiario.clima.get(0).icono}"
+            tools:src="@drawable/ic_viento"
+            tools:tint="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1"
+            android:textColor="@color/colorWhite"
+            app:convertirTemperaturaMin="@{climaDiario.temperatura.tempMin}"
+            app:convertirTemperaturaMax="@{climaDiario.temperatura.tempMax}"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            tools:text="12°/25°" />
+    </LinearLayout>
+</layout>

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.api.apiService
+import com.dsl.clima.data.ClimaDiario
 import com.dsl.clima.data.DatosMeteorologicosActuales
 import com.dsl.clima.data.DatosMeteorologicosActualesPrevistos
 import com.dsl.clima.util.EstadoApi

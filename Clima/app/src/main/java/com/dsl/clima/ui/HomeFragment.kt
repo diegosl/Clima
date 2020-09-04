@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
+import com.dsl.clima.adapter.MisUbicacionesAdapter
+import com.dsl.clima.adapter.PronosticoExtendidoAdapter
 import com.dsl.clima.databinding.FragmentHomeBinding
 import com.dsl.clima.util.efectoShimmer
 import com.dsl.clima.viewmodel.HomeViewModel
@@ -52,6 +54,9 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshHome.setOnRefreshListener {
             viewModel.getClima("Cordoba")
         }
+
+        binding.recyclerViewPronosticoExtendido.adapter = PronosticoExtendidoAdapter(PronosticoExtendidoAdapter.OnClickListener {
+        })
 
         return  binding.root
     }

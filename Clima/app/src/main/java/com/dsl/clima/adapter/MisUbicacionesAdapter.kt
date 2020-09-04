@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dsl.clima.data.DatosMeteorologicosActuales
-import com.dsl.clima.databinding.GridViewMisUbicacionesItemBinding
+import com.dsl.clima.databinding.MisUbicacionesItemBinding
 
 class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
     ListAdapter<DatosMeteorologicosActuales,
             MisUbicacionesAdapter.MisUbicacionesViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MisUbicacionesViewHolder {
-        return MisUbicacionesViewHolder(GridViewMisUbicacionesItemBinding.inflate(
+        return MisUbicacionesViewHolder(MisUbicacionesItemBinding.inflate(
             LayoutInflater.from(parent.context)))
     }
 
@@ -25,8 +25,7 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
         holder.bind(datosMeteorologicosActuales)
     }
 
-    class MisUbicacionesViewHolder(private var binding:
-                                   GridViewMisUbicacionesItemBinding):
+    class MisUbicacionesViewHolder(private var binding: MisUbicacionesItemBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(datosMeteorologicosActuales: DatosMeteorologicosActuales) {
             binding.datosMeteorologicosActuales = datosMeteorologicosActuales

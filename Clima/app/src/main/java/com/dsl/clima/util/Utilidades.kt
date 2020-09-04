@@ -5,10 +5,10 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.dsl.clima.R
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 enum class EstadoApi { CARGANDO, ERROR, FINALIZADO }
@@ -22,8 +22,25 @@ fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()}%"
 fun convertirVelocidad(velocidad: Double) = "$velocidad m/s"
 
 fun convertirFecha(tiempo: Int): String {
-    val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-    return simpleDateFormat.format(tiempo*1000L)
+    val fecha = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+    return fecha.format(tiempo*1000L)
+}
+
+fun convertirTempMinMax(tempMin: Double, tempMax: Double) = "${tempMin.roundToInt()}°/${tempMax.roundToInt()}°"
+
+fun convertirDia(tiempo: Int): String {
+    val calendario = Calendar.getInstance()
+    calendario.timeInMillis = tiempo * 1000L
+    return when(calendario.get(Calendar.DAY_OF_WEEK)) {
+        Calendar.SUNDAY -> "Domingo"
+        Calendar.MONDAY -> "Lunes"
+        Calendar.TUESDAY -> "Martes"
+        Calendar.WEDNESDAY -> "Miércoles"
+        Calendar.THURSDAY -> "Jueves"
+        Calendar.FRIDAY -> "Viernes"
+        Calendar.SATURDAY -> "Sábado"
+        else -> ""
+    }
 }
 
 @SuppressLint("ResourceAsColor")
