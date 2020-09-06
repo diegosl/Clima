@@ -2,26 +2,27 @@ package com.dsl.clima.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
-import com.dsl.clima.adapter.MisUbicacionesAdapter
 import com.dsl.clima.adapter.PronosticoExtendidoAdapter
+import com.dsl.clima.data.source.local.getDatebase
+import com.dsl.clima.data.source.remote.climaService
 import com.dsl.clima.databinding.FragmentHomeBinding
+import com.dsl.clima.domain.repository.ClimaRepository
 import com.dsl.clima.util.efectoShimmer
 import com.dsl.clima.viewmodel.HomeViewModel
+import com.dsl.clima.viewmodel.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeViewModel::class.java)
-    }
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModelFactory: HomeViewModelFactory
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -29,11 +30,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)
+        viewModelFactory = HomeViewModelFactory(ClimaRepository(getDatebase(activity!!.applicationContext).climaDatabaseDao))
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.fabAgregarUbicacion.setOnClickListener {
             this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavAgregarUbicacion())
+        }
+
+        /**
+         * Cuando el usuario desliza para actualizar swipeRefreshHome
+         * se actuliza la lista de productos products.
+         */
+        binding.swipeRefreshHome.setColorSchemeColors(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
+        binding.swipeRefreshHome.setOnRefreshListener {
+            //viewModel.getClima("Cordoba")
         }
 
         /**
@@ -45,15 +57,6 @@ class HomeFragment : Fragment() {
         viewModel.estadoApi.observe(this, Observer {
             efectoShimmer(it, binding.shimmerHome, binding.layoutHome, binding.swipeRefreshHome)
         })
-
-        /**
-         * Cuando el usuario desliza para actualizar swipeRefreshHome
-         * se actuliza la lista de productos products.
-         */
-        binding.swipeRefreshHome.setColorSchemeColors(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
-        binding.swipeRefreshHome.setOnRefreshListener {
-            viewModel.getClima("Cordoba")
-        }
 
         binding.recyclerViewPronosticoExtendido.adapter = PronosticoExtendidoAdapter(PronosticoExtendidoAdapter.OnClickListener {
         })

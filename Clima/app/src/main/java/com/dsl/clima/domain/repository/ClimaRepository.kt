@@ -11,7 +11,7 @@ import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ClimaRepository(private val dataRemote: ClimaService,
+class ClimaRepository(//private val dataRemote: ClimaService,
                       private val dataLocal: ClimaDatabaseDao) {
 
     suspend fun refrescarClima(ciudad: String) {

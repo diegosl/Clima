@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.dsl.clima.data.model.DatosMeteorologicosActuales
 import com.dsl.clima.data.model.DatosMeteorologicosActualesPrevistos
 import com.dsl.clima.data.source.remote.climaService
+import com.dsl.clima.domain.repository.ClimaRepository
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val climaRepository: ClimaRepository) : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
@@ -33,10 +34,10 @@ class HomeViewModel : ViewModel() {
      * Inicializa el modelo de vista viewModel.
      */
     init {
-       getClima("Cordoba")
+       //getClima("Cordoba")
     }
 
-    fun getClima(ciudad: String) {
+    /*fun getClima(ciudad: String) {
         coroutineScope.launch {
             val getDatosMeteorologicosActualesDeferred = climaService.retrofitService.getDatosMeteorologicosActuales(ciudad)
             try {
@@ -57,7 +58,9 @@ class HomeViewModel : ViewModel() {
                     DatosMeteorologicosActualesPrevistos()
             }
         }
-    }
+    }*/
+
+
 
     /**
      * Se utiliza para destruir el viewModel cuando se destruye el fragmento.
