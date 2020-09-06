@@ -1,4 +1,4 @@
-package com.dsl.clima.domain
+package com.dsl.clima.data.model
 
 import com.squareup.moshi.Json
 

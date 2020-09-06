@@ -1,7 +1,7 @@
 package com.dsl.clima.data.source.remote
 
-import com.dsl.clima.domain.DatosMeteorologicosActuales
-import com.dsl.clima.domain.DatosMeteorologicosActualesPrevistos
+import com.dsl.clima.data.model.DatosMeteorologicosActuales
+import com.dsl.clima.data.model.DatosMeteorologicosActualesPrevistos
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -78,9 +78,9 @@ interface ClimaService {
 }
 
 /**
- * Instacia [apiService] que crea comunicacion con API.
+ * Instacia [climaService] que crea comunicacion con API.
  */
-object apiService {
+object climaService {
     val retrofitService : ClimaService by lazy {
         retrofit.create(ClimaService::class.java)
     }

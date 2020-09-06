@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dsl.clima.domain.DatosMeteorologicosActuales
+import com.dsl.clima.data.model.DatosMeteorologicosActuales
 import com.dsl.clima.databinding.MisUbicacionesItemBinding
 
 class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :

@@ -1,6 +1,5 @@
-package com.dsl.clima.domain
+package com.dsl.clima.data.model
 
-import com.dsl.clima.domain.Clima
 import com.squareup.moshi.Json
 
 data class ClimaActual(@Json(name = "dt") val fecha: Int = 0,

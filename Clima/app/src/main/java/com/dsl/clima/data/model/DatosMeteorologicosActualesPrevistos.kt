@@ -1,7 +1,5 @@
-package com.dsl.clima.domain
+package com.dsl.clima.data.model
 
-import com.dsl.clima.domain.ClimaActual
-import com.dsl.clima.domain.ClimaDiario
 import com.squareup.moshi.Json
 
 data class DatosMeteorologicosActualesPrevistos(@Json(name = "lat") val latitud: Double = 0.0,

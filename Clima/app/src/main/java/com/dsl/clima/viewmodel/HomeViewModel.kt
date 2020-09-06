@@ -3,9 +3,9 @@ package com.dsl.clima.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dsl.clima.data.source.remote.apiService
-import com.dsl.clima.domain.DatosMeteorologicosActuales
-import com.dsl.clima.domain.DatosMeteorologicosActualesPrevistos
+import com.dsl.clima.data.model.DatosMeteorologicosActuales
+import com.dsl.clima.data.model.DatosMeteorologicosActualesPrevistos
+import com.dsl.clima.data.source.remote.climaService
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +38,11 @@ class HomeViewModel : ViewModel() {
 
     fun getClima(ciudad: String) {
         coroutineScope.launch {
-            val getDatosMeteorologicosActualesDeferred = apiService.retrofitService.getDatosMeteorologicosActuales(ciudad)
+            val getDatosMeteorologicosActualesDeferred = climaService.retrofitService.getDatosMeteorologicosActuales(ciudad)
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
                 val result_1 = getDatosMeteorologicosActualesDeferred.await()
-                val getDatosMeteorologicosActualesPrevistosDeferred = apiService.retrofitService.getDatosMeteorologicosActualesPrevistos(
+                val getDatosMeteorologicosActualesPrevistosDeferred = climaService.retrofitService.getDatosMeteorologicosActualesPrevistos(
                     result_1.coordenadaCiudad.latitud, result_1.coordenadaCiudad.longitud
                 )
                 val result_2 = getDatosMeteorologicosActualesPrevistosDeferred.await()
