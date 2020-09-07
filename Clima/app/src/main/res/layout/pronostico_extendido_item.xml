@@ -6,7 +6,7 @@
     <data>
         <variable
             name="climaDiario"
-            type="com.dsl.clima.model.ClimaDiario" />
+            type="com.dsl.clima.data.model.ClimaDiario" />
         <import type="android.view.View"/>
     </data>
 
