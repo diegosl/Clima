@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dsl.clima.data.model.ClimaDiario
 import com.dsl.clima.databinding.PronosticoExtendidoItemBinding
+import com.dsl.clima.domain.model.PronosticoDiarioModel
 
 class PronosticoExtendidoAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<ClimaDiario,
+    ListAdapter<PronosticoDiarioModel,
             PronosticoExtendidoAdapter.PronosticoExtendidoViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PronosticoExtendidoViewHolder {
@@ -18,32 +18,32 @@ class PronosticoExtendidoAdapter( private val onClickListener: OnClickListener )
     }
 
     override fun onBindViewHolder(holder: PronosticoExtendidoViewHolder, position: Int) {
-        val climaDiario = getItem(position)
+        val pronosticoDiarioModel = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(climaDiario)
+            onClickListener.onClick(pronosticoDiarioModel)
         }
-        holder.bind(climaDiario)
+        holder.bind(pronosticoDiarioModel)
     }
 
     class PronosticoExtendidoViewHolder(private var binding: PronosticoExtendidoItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(climaDiario: ClimaDiario) {
-            binding.climaDiario = climaDiario
+        fun bind(pronosticoDiarioModel: PronosticoDiarioModel) {
+            binding.pronosticoDiarioModel = pronosticoDiarioModel
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ClimaDiario>() {
-        override fun areItemsTheSame(oldItem: ClimaDiario, newItem: ClimaDiario): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<PronosticoDiarioModel>() {
+        override fun areItemsTheSame(oldItem: PronosticoDiarioModel, newItem: PronosticoDiarioModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: ClimaDiario, newItem: ClimaDiario): Boolean {
-            return oldItem.fecha == newItem.fecha
+        override fun areContentsTheSame(oldItem: PronosticoDiarioModel, newItem: PronosticoDiarioModel): Boolean {
+            return oldItem.fechaDiaria == newItem.fechaDiaria
         }
     }
 
-    class OnClickListener(val clickListener: (climaDiario: ClimaDiario) -> Unit) {
-        fun onClick(climaDiario: ClimaDiario) = clickListener(climaDiario)
+    class OnClickListener(val clickListener: (pronosticoDiarioModel: PronosticoDiarioModel) -> Unit) {
+        fun onClick(pronosticoDiarioModel: PronosticoDiarioModel) = clickListener(pronosticoDiarioModel)
     }
 }

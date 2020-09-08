@@ -5,18 +5,18 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dsl.clima.data.model.ClimaDiario
-import com.dsl.clima.data.model.DatosMeteorologicosActuales
+import com.dsl.clima.domain.model.PronosticoActualModel
+import com.dsl.clima.domain.model.PronosticoDiarioModel
 import com.dsl.clima.util.*
 
 @BindingAdapter("listaPronosticos")
-fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<DatosMeteorologicosActuales>?) {
+fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<PronosticoActualModel>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listaPronosticoExtendido")
-fun bindRecyclerViewPronosticoExtendido(recyclerView: RecyclerView, data: List<ClimaDiario>?) {
+fun bindRecyclerViewPronosticoExtendido(recyclerView: RecyclerView, data: List<PronosticoDiarioModel>?) {
     val adapter = recyclerView.adapter as PronosticoExtendidoAdapter
     adapter.submitList(data)
 }

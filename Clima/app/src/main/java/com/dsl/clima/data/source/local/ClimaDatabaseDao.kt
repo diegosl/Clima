@@ -13,6 +13,9 @@ interface ClimaDatabaseDao {
     @Update
     fun actualizarClima(clima: ClimaCache)
 
+    @Query("DELETE FROM tabla_clima_cache")
+    fun eliminarClima()
+
     @Query("SELECT * FROM tabla_clima_cache LIMIT 1")
     fun getClimaCache(): ClimaCache?
 }

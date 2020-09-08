@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="climaDiario"
-            type="com.dsl.clima.data.model.ClimaDiario" />
+            name="pronosticoDiarioModel"
+            type="com.dsl.clima.domain.model.PronosticoDiarioModel" />
         <import type="android.view.View"/>
     </data>
 
@@ -19,21 +19,21 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="start"
-            android:gravity="center"
+            android:gravity="center|end"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:convertirDia="@{climaDiario.fecha}"
+            app:convertirDia="@{pronosticoDiarioModel.fechaDiaria}"
             tools:text="Lunes" />
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            app:imageUrl="@{climaDiario.clima.get(0).icono}"
+            app:imageUrl="@{pronosticoDiarioModel.iconoDiario}"
             tools:src="@drawable/ic_lluvia"
             tools:tint="@color/colorAccent" />
 
@@ -41,15 +41,15 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="end"
-            android:gravity="center"
+            android:gravity="center|start"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:convertirTemperaturaMax="@{climaDiario.temperatura.tempMax}"
-            app:convertirTemperaturaMin="@{climaDiario.temperatura.tempMin}"
+            app:convertirTemperaturaMax="@{pronosticoDiarioModel.temperaturaMax}"
+            app:convertirTemperaturaMin="@{pronosticoDiarioModel.temperaturaMin}"
             tools:text="12°/25°" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

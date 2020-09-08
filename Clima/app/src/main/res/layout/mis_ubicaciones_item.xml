@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="datosMeteorologicosActuales"
-            type="com.dsl.clima.data.model.DatosMeteorologicosActuales" />
+            name="pronosticoActualModel"
+            type="com.dsl.clima.domain.model.PronosticoActualModel" />
         <import type="android.view.View"/>
     </data>
 
@@ -40,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@{datosMeteorologicosActuales.ciudad}"
+                        android:text="Villa Giardino AR"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"
                         android:textSize="12sp"

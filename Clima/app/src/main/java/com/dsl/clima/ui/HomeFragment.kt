@@ -12,10 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
 import com.dsl.clima.adapter.PronosticoExtendidoAdapter
-import com.dsl.clima.data.source.local.getDatebase
-import com.dsl.clima.data.source.remote.climaService
 import com.dsl.clima.databinding.FragmentHomeBinding
-import com.dsl.clima.domain.repository.ClimaRepository
+import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.util.efectoShimmer
 import com.dsl.clima.viewmodel.HomeViewModel
 import com.dsl.clima.viewmodel.HomeViewModelFactory
@@ -30,7 +28,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)
-        viewModelFactory = HomeViewModelFactory(ClimaRepository(getDatebase(activity!!.applicationContext).climaDatabaseDao))
+        //viewModelFactory = HomeViewModelFactory(ClimaRepository(getDatebase(activity!!.applicationContext).climaDatabaseDao))
+        viewModelFactory = HomeViewModelFactory(PronosticoRepository())
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel

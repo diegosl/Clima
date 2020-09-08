@@ -11,7 +11,7 @@ buildscript {
         retrofit_version = "2.5.0"
         moshi_version = "1.8.0"
         glide_version = "4.9.0"
-        room_version = "2.2.0"
+        room_version = "2.2.5"
         shimmer_version= "0.1.0@aar"
     }
     repositories {

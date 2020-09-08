@@ -1,7 +1,6 @@
 package com.dsl.clima.data.source.remote
 
-import com.dsl.clima.data.model.DatosMeteorologicosActuales
-import com.dsl.clima.data.model.DatosMeteorologicosActualesPrevistos
+import com.dsl.clima.domain.model.PronosticoActualModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -49,39 +48,36 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 /**
- * La interfaz [ClimaService] contiene los metodos para consultar las diferentes peticiones
+ * La interfaz [PronosticoService] contiene los metodos para consultar las diferentes peticiones
  * al web service.
  *
  * @author Sosa Ludueña Diego
  * @version 1.0
  */
-interface ClimaService {
+interface PronosticoService {
     @GET("weather")
     fun getListaDatosMeteorologicosActuales(@Query("q") cityName: String = "Cordoba",
                                             @Query("lang") idioma: String = LANGUAGE,
-                                            @Query("appid") apiKey: String = API_KEY):
-            Deferred<List<DatosMeteorologicosActuales>>
+                                            @Query("appid") apiKey: String = API_KEY): Deferred<List<PronosticoActualModel>>
 
     @GET("weather")
-    fun getDatosMeteorologicosActuales(@Query("q") cityName: String = "Cordoba",
-                                       @Query("lang") idioma: String = LANGUAGE,
-                                       @Query("appid") apiKey: String = API_KEY):
-            Deferred<DatosMeteorologicosActuales>
+    fun getCiudad(@Query("q") cityName: String = "Cordoba",
+                  @Query("lang") idioma: String = LANGUAGE,
+                  @Query("appid") apiKey: String = API_KEY): Deferred<CiudadRemote>
 
     @GET("onecall")
-    fun getDatosMeteorologicosActualesPrevistos(@Query("lat") latitud: Double = 0.0,
-                                                @Query("lon") longitud: Double = 0.0,
-                                                @Query("units") unidad: String = CELSIUS,
-                                                @Query("lang") idioma: String = LANGUAGE,
-                                                @Query("appid") apiKey: String = API_KEY):
-            Deferred<DatosMeteorologicosActualesPrevistos>
+    fun getPronostico(@Query("lat") latitud: Double = 0.0,
+                      @Query("lon") longitud: Double = 0.0,
+                      @Query("units") unidad: String = CELSIUS,
+                      @Query("lang") idioma: String = LANGUAGE,
+                      @Query("appid") apiKey: String = API_KEY): Deferred<PronosticoRemote>
 }
 
 /**
- * Instacia [climaService] que crea comunicacion con API.
+ * Instacia [apiService] que crea comunicacion con API.
  */
-object climaService {
-    val retrofitService : ClimaService by lazy {
-        retrofit.create(ClimaService::class.java)
+object apiService {
+    val retrofitService : PronosticoService by lazy {
+        retrofit.create(PronosticoService::class.java)
     }
 }

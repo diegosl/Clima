@@ -2,12 +2,12 @@ package com.dsl.clima.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dsl.clima.domain.repository.ClimaRepository
+import com.dsl.clima.data.repository.PronosticoRepository
 
-class HomeViewModelFactory(private val climaRepository: ClimaRepository): ViewModelProvider.Factory {
+class HomeViewModelFactory(private val pronosticoRepository: PronosticoRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(climaRepository) as T
+            return HomeViewModel(pronosticoRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
