@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
          */
         binding.swipeRefreshHome.setColorSchemeColors(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
         binding.swipeRefreshHome.setOnRefreshListener {
-            viewModel.refescarClima("Cordoba")
+            viewModel.refescarPronostico("Cordoba")
         }
 
         /**

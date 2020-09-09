@@ -28,13 +28,20 @@ class HomeViewModel(private val pronosticoRepository: PronosticoRepository) : Vi
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        refescarClima("Cordoba")
+        refescarPronostico("Cordoba")
     }
 
-    fun refescarClima(ciudad: String) {
+    fun refescarPronostico(ciudad: String) {
         coroutineScope.launch {
-            _pronosticoModel.value = pronosticoRepository.refrescarPronostico(ciudad)
-            _estadoApi.value = pronosticoRepository.estadoApi
+            try {
+                _estadoApi.value = EstadoApi.CARGANDO
+                _pronosticoModel.value = pronosticoRepository.refrescarPronostico(ciudad)
+                _estadoApi.value = EstadoApi.FINALIZADO
+            }
+            catch (e: Exception) {
+                _estadoApi.value = EstadoApi.ERROR
+                _pronosticoModel.value = PronosticoModel()
+            }
         }
     }
 

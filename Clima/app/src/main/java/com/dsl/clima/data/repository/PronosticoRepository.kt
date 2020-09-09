@@ -8,30 +8,19 @@ import com.dsl.clima.domain.model.CiudadModel
 import com.dsl.clima.domain.model.PronosticoActualModel
 import com.dsl.clima.domain.model.PronosticoDiarioModel
 import com.dsl.clima.domain.model.PronosticoModel
-import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PronosticoRepository(
     //private val dataLocal: PronosticoDatabaseDao
 ) {
-
-    var estadoApi = EstadoApi.CARGANDO
-
     private lateinit var pronosticoModel: PronosticoModel
 
     suspend fun refrescarPronostico(nombreCiudad: String): PronosticoModel {
         withContext(Dispatchers.IO) {
-            try {
-                estadoApi = EstadoApi.CARGANDO
-                val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
-                val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
-                pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
-                estadoApi = EstadoApi.FINALIZADO
-            } catch (e: Exception) {
-                estadoApi = EstadoApi.ERROR
-                pronosticoModel = PronosticoModel()
-            }
+            val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
+            val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
+            pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
         }
         return pronosticoModel
     }
