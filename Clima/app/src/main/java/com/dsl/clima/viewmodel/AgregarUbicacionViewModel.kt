@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.data.repository.PronosticoRepository
-import com.dsl.clima.data.source.remote.apiService
-import com.dsl.clima.domain.model.PronosticoActualModel
+import com.dsl.clima.domain.model.CiudadModel
 import com.dsl.clima.domain.model.PronosticoModel
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
@@ -13,14 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoRepository) : ViewModel() {
+class AgregarUbicacionViewModel(private val pronosticoRepository: PronosticoRepository) : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _listaPronosticoModel = MutableLiveData<List<PronosticoModel>>()
-    val listaPronosticoModel: LiveData<List<PronosticoModel>>
-        get() = _listaPronosticoModel
+    private val _ciudadModel = MutableLiveData<CiudadModel>()
+    val ciudadModel: LiveData<CiudadModel>
+        get() = _ciudadModel
 
     private val _estadoApi = MutableLiveData<EstadoApi>()
     val estadoApi: LiveData<EstadoApi>
@@ -30,12 +29,27 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        getMisUbicaciones()
+        getCiudad("")
     }
 
-    private fun getMisUbicaciones() {
+    fun getCiudad(nombreCiudad: String) {
         coroutineScope.launch {
-            _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
+            try {
+                _estadoApi.value = EstadoApi.CARGANDO
+                _ciudadModel.value = pronosticoRepository.getCiudad(nombreCiudad)
+                _estadoApi.value = EstadoApi.FINALIZADO
+            }
+            catch (e: Exception) {
+                _estadoApi.value = EstadoApi.ERROR
+                _ciudadModel.value = CiudadModel()
+            }
+        }
+    }
+
+    fun insertarPronostico() {
+        coroutineScope.launch {
+            val pronosticoModel = PronosticoModel(ciudadModel = _ciudadModel.value!!)
+            pronosticoRepository.insertarPronostico(pronosticoModel)
         }
     }
 

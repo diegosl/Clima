@@ -2,12 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsl.clima.viewmodel.AgregarUbicacionViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/degradado_gris_oscuro">
 
         <LinearLayout
+            android:id="@+id/layout_resultado_ciudad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -31,19 +39,21 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1"
-                android:text="Córdoba AR"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                app:unirCiudad="@{viewModel.ciudadModel.nombreCiudad}"
+                app:unirPais="@{viewModel.ciudadModel.nombrePais}"
                 tools:text="Córdoba AR"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_no_resultado_ciudad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:visibility="invisible">
+            tools:visibility="invisible">
 
             <ImageView
                 android:layout_width="50dp"

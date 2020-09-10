@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="1"
-            app:listaPronosticos="@{viewModel.ciudades}"
+            app:listaPronosticos="@{viewModel.listaPronosticoModel}"
             tools:itemCount="4"
             tools:listitem="@layout/mis_ubicaciones_item"/>
     </LinearLayout>

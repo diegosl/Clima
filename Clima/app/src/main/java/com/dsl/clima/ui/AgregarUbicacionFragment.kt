@@ -7,10 +7,21 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
+import com.dsl.clima.data.repository.PronosticoRepository
+import com.dsl.clima.data.source.local.PronosticoDatabase.Companion.getDatebase
 import com.dsl.clima.databinding.FragmentAgregarUbicacionBinding
+import com.dsl.clima.util.EstadoApi
+import com.dsl.clima.viewmodel.AgregarUbicacionViewModel
+import com.dsl.clima.viewmodel.AgregarUbicacionViewModelFactory
 
 class AgregarUbicacionFragment : Fragment() {
+    private lateinit var viewModel: AgregarUbicacionViewModel
+    private lateinit var viewModelFactory: AgregarUbicacionViewModelFactory
+
     private lateinit var searchItem: MenuItem
     private lateinit var searchView: SearchView
 
@@ -19,9 +30,35 @@ class AgregarUbicacionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentAgregarUbicacionBinding.inflate(inflater)
+        viewModelFactory = AgregarUbicacionViewModelFactory(PronosticoRepository(getDatebase(activity!!.applicationContext).pronosticoDatabaseDao))
+        viewModel = ViewModelProvider(this, viewModelFactory).get(AgregarUbicacionViewModel::class.java)
+        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        viewModel.estadoApi.observe(this, Observer {
+            when(it) {
+                EstadoApi.CARGANDO -> {
+                    binding.layoutResultadoCiudad.visibility = View.GONE
+                    binding.layoutNoResultadoCiudad.visibility = View.GONE
+                }
+                EstadoApi.FINALIZADO -> {
+                    binding.layoutResultadoCiudad.visibility = View.VISIBLE
+                    binding.layoutNoResultadoCiudad.visibility = View.GONE
+                }
+                EstadoApi.ERROR -> {
+                    binding.layoutResultadoCiudad.visibility = View.GONE
+                    binding.layoutNoResultadoCiudad.visibility = View.VISIBLE
+                }
+            }
+        })
+
+        binding.layoutResultadoCiudad.setOnClickListener {
+            viewModel.insertarPronostico()
+            this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome())
+        }
 
         /**
-         * Se habilita opciones de menu a fragmento [ProductFragment]
+         * Se habilita opciones de menu a fragmento [AgregarUbicacionFragment]
          */
         setHasOptionsMenu(true)
 
@@ -31,7 +68,7 @@ class AgregarUbicacionFragment : Fragment() {
     /**
      * Este metodo se sobrescribe para crear el menú de opciones
      * cuando el usuario abre el menú por primera vez.
-     * Muestra los elementos de la barra de app [searchView] y [filter].
+     * Muestra los elementos de la barra de app [searchView] y [getCiudad].
      * La finalidad es configurar la interfaz de busqueda y la logica de la misma.
      */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,11 +92,11 @@ class AgregarUbicacionFragment : Fragment() {
                 /**
                  * La busqueda [query] se pasa a minuscula
                  * y se quitan los espacios en los extremos.
-                 * Luego se llama a la funcion [filter] para efectuar la busqueda.
+                 * Luego se llama a la funcion [getCiudad] para efectuar la busqueda.
                  * Por ultimo, cuando se pulsa en buscar se quita el foco de
                  * SearchView [searchView] y se quita el teclado de la pantalla.
                  */
-                //query?.toLowerCase()?.trim()?.let { viewModel.filter(it) }
+                query?.toLowerCase()?.trim()?.let { viewModel.getCiudad(it) }
                 searchView.clearFocus()
                 searchItem.collapseActionView()
                 return true
@@ -67,7 +104,7 @@ class AgregarUbicacionFragment : Fragment() {
 
             // Para buscar cada vez que añade un nuevo caracter
             override fun onQueryTextChange(newText: String?): Boolean {
-                //newText?.toLowerCase()?.trim()?.let { viewModel.filter(it) }
+                //newText?.toLowerCase()?.trim()?.let { viewModel.getCiudad(it) }
                 return false
             }
 

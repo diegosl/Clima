@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dsl.clima.databinding.MisUbicacionesItemBinding
-import com.dsl.clima.domain.model.PronosticoActualModel
+import com.dsl.clima.domain.model.PronosticoModel
 
 class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<PronosticoActualModel,
+    ListAdapter<PronosticoModel,
             MisUbicacionesAdapter.MisUbicacionesViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MisUbicacionesViewHolder {
@@ -18,32 +18,32 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
     }
 
     override fun onBindViewHolder(holder: MisUbicacionesViewHolder, position: Int) {
-        val datosMeteorologicosActuales = getItem(position)
+        val pronosticoModel = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(datosMeteorologicosActuales)
+            onClickListener.onClick(pronosticoModel)
         }
-        holder.bind(datosMeteorologicosActuales)
+        holder.bind(pronosticoModel)
     }
 
     class MisUbicacionesViewHolder(private var binding: MisUbicacionesItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(pronosticoActualModel: PronosticoActualModel) {
-            binding.pronosticoActualModel = pronosticoActualModel
+        fun bind(pronosticoModel: PronosticoModel) {
+            binding.pronosticoModel = pronosticoModel
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<PronosticoActualModel>() {
-        override fun areItemsTheSame(oldItem: PronosticoActualModel, newItem: PronosticoActualModel): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<PronosticoModel>() {
+        override fun areItemsTheSame(oldItem: PronosticoModel, newItem: PronosticoModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: PronosticoActualModel, newItem: PronosticoActualModel): Boolean {
-            return oldItem.fechaActual == newItem.fechaActual
+        override fun areContentsTheSame(oldItem: PronosticoModel, newItem: PronosticoModel): Boolean {
+            return oldItem.ciudadModel.nombreCiudad == newItem.ciudadModel.nombreCiudad
         }
     }
 
-    class OnClickListener(val clickListener: (pronosticoActualModel: PronosticoActualModel) -> Unit) {
-        fun onClick(pronosticoActualModel: PronosticoActualModel) = clickListener(pronosticoActualModel)
+    class OnClickListener(val clickListener: (pronosticoModel: PronosticoModel) -> Unit) {
+        fun onClick(pronosticoModel: PronosticoModel) = clickListener(pronosticoModel)
     }
 }

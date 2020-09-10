@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="pronosticoActualModel"
-            type="com.dsl.clima.domain.model.PronosticoActualModel" />
+            name="pronosticoModel"
+            type="com.dsl.clima.domain.model.PronosticoModel" />
         <import type="android.view.View"/>
     </data>
 
@@ -40,12 +40,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Villa Giardino AR"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:maxLines="1"
                         android:ellipsize="end"
+                        app:unirCiudad="@{pronosticoModel.ciudadModel.nombreCiudad}"
+                        app:unirPais="@{pronosticoModel.ciudadModel.nombrePais}"
                         tools:text="Villa Giardino, Córdoba Argentina" />
                 </LinearLayout>
                 <LinearLayout
@@ -62,22 +63,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Lunes 4 de agosto"
                         android:textColor="@color/colorWhite"
                         android:textSize="10sp"
                         android:maxLines="1"
                         android:ellipsize="end"
+                        app:convertirFecha="@{pronosticoModel.pronosticoActualModel.fechaActual}"
                         tools:text="Lunes, 3 de Agosto" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="69°"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:textSize="50sp"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    app:convertirTemperatura="@{pronosticoModel.pronosticoActualModel.temperaturaActual}"
                     tools:text="27°" />
             </LinearLayout>
             <LinearLayout
@@ -86,17 +87,19 @@
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="vertical">
-                <androidx.appcompat.widget.AppCompatImageView
+
+                <ImageView
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="68dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_sol"
-                    app:tint="@color/colorWhite"/>
+                    app:imageUrl="@{pronosticoModel.pronosticoActualModel.iconoActual}"
+                    tools:src="@drawable/ic_sol"
+                    tools:tint="@color/colorWhite" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Soleado"
+                    android:text="@{pronosticoModel.pronosticoActualModel.descripcionActual}"
                     android:textColor="@color/colorWhite"
                     android:textSize="10sp"
                     android:maxLines="1"

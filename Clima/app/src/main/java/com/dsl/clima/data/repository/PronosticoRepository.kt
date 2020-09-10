@@ -1,5 +1,7 @@
 package com.dsl.clima.data.repository
 
+import com.dsl.clima.data.source.local.PronosticoDatabaseDao
+import com.dsl.clima.data.source.local.PronosticoLocal
 import com.dsl.clima.data.source.remote.CiudadRemote
 import com.dsl.clima.data.source.remote.PronosticoDiarioRemote
 import com.dsl.clima.data.source.remote.PronosticoRemote
@@ -11,18 +13,39 @@ import com.dsl.clima.domain.model.PronosticoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PronosticoRepository(
-    //private val dataLocal: PronosticoDatabaseDao
-) {
-    private lateinit var pronosticoModel: PronosticoModel
-
+class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
     suspend fun refrescarPronostico(nombreCiudad: String): PronosticoModel {
+        var pronosticoModel = PronosticoModel()
         withContext(Dispatchers.IO) {
             val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
             val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
             pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
         }
         return pronosticoModel
+    }
+
+    suspend fun getCiudad(nombreCiudad: String): CiudadModel {
+        var ciudadModel = CiudadModel()
+        withContext(Dispatchers.IO) {
+            val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
+            ciudadModel = transformarCiudadRemoteModel(ciudadRemote)
+        }
+        return ciudadModel
+    }
+
+    suspend fun insertarPronostico(pronosticoModel: PronosticoModel) {
+        withContext(Dispatchers.IO) {
+            val pronosticoLocal = transformarPronosticoModelLocal(pronosticoModel)
+            dataLocal.insertarPronosticoLocal(pronosticoLocal)
+        }
+    }
+
+    suspend fun getListaPronostico(): List<PronosticoModel> {
+        var listaPronosticoModel = listOf(PronosticoModel())
+        withContext(Dispatchers.IO) {
+            listaPronosticoModel = transformarListaPronosticoLocalModel(dataLocal.getListaPronosticoLocal())
+        }
+        return listaPronosticoModel
     }
 }
 
@@ -51,6 +74,41 @@ fun transformarListaPronosticoDiarioRemoteModel(listaPronosticoDiarioRemote: Lis
             temperaturaMax = it.temperaturaDiaria.tempMax,
             descripcionDiaria = it.climaDiaria[0].descripcion,
             iconoDiario = it.climaDiaria[0].icono
+        )
+    }
+}
+
+fun transformarCiudadRemoteModel(ciudadRemote: CiudadRemote) = CiudadModel(ciudadRemote.nombreCiudad, ciudadRemote.sys.nombrePais)
+
+fun transformarPronosticoModelLocal(pronosticoModel: PronosticoModel) : PronosticoLocal {
+    return PronosticoLocal(
+        pronosticoModel.ciudadModel.nombreCiudad,
+        pronosticoModel.ciudadModel.nombrePais,
+        pronosticoModel.pronosticoActualModel.fechaActual,
+        pronosticoModel.pronosticoActualModel.temperaturaActual,
+        pronosticoModel.pronosticoActualModel.humedadActual,
+        pronosticoModel.pronosticoActualModel.nubosidadActual,
+        pronosticoModel.pronosticoActualModel.velocidadVientoActual,
+        pronosticoModel.pronosticoActualModel.descripcionActual,
+        pronosticoModel.pronosticoActualModel.iconoActual
+    )
+}
+
+fun transformarListaPronosticoLocalModel(listaPronosticoLocal: List<PronosticoLocal>) : List<PronosticoModel> {
+    return listaPronosticoLocal.map {
+        PronosticoModel(
+            CiudadModel(
+                it.nombreCiudad,
+                it.nombrePais),
+            PronosticoActualModel(
+                it.fechaActual,
+                it.tempActual,
+                it.nubosidadActual,
+                it.velocidadVientoActual,
+                it.humedadActual,
+                it.descripcionActual,
+                it.iconoActual),
+            listOf(PronosticoDiarioModel())
         )
     }
 }
