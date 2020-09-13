@@ -29,7 +29,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)
-        viewModelFactory = HomeViewModelFactory(PronosticoRepository(getDatebase(activity!!.applicationContext).pronosticoDatabaseDao))
+
+        val nombreCiudad = HomeFragmentArgs.fromBundle(requireArguments()).nombreCiudad
+
+        viewModelFactory = HomeViewModelFactory(PronosticoRepository(getDatebase(activity!!.applicationContext).pronosticoDatabaseDao), nombreCiudad)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel
@@ -44,7 +47,7 @@ class HomeFragment : Fragment() {
          */
         binding.swipeRefreshHome.setColorSchemeColors(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
         binding.swipeRefreshHome.setOnRefreshListener {
-            viewModel.refescarPronostico("Cordoba")
+            viewModel.refescarPronostico()
         }
 
         /**

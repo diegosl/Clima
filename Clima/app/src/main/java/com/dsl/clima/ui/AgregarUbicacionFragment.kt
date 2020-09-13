@@ -54,7 +54,7 @@ class AgregarUbicacionFragment : Fragment() {
 
         binding.layoutResultadoCiudad.setOnClickListener {
             viewModel.insertarPronostico()
-            this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome())
+            this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome(viewModel.ciudadModel.value!!.nombreCiudad))
         }
 
         /**

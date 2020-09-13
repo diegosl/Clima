@@ -17,9 +17,12 @@ class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
     suspend fun refrescarPronostico(nombreCiudad: String): PronosticoModel {
         var pronosticoModel = PronosticoModel()
         withContext(Dispatchers.IO) {
-            val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
+            var pronosticoLocal = dataLocal.getPronosticoSeleccionadoLocal(nombreCiudad)
+            val ciudadRemote = apiService.retrofitService.getCiudad(pronosticoLocal.nombreCiudad).await()
             val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
             pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
+            pronosticoLocal = transformarPronosticoModelLocal(pronosticoModel)
+            dataLocal.actualizarPronosticoLocal(pronosticoLocal)
         }
         return pronosticoModel
     }

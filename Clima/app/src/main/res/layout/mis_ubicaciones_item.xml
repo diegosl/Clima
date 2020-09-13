@@ -15,12 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardElevation="0dp"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary">
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -30,52 +30,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="24dp"
+                        android:layout_height="31dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_ubicacion"
-                        app:tint="@color/colorWhite"/>
+                        app:tint="@color/colorWhite" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
                         android:textColor="@color/colorWhite"
+                        android:fontFamily="@font/montserrat"
                         android:textStyle="bold"
-                        android:textSize="12sp"
+                        android:textSize="20sp"
                         android:maxLines="1"
                         android:ellipsize="end"
                         app:unirCiudad="@{pronosticoModel.ciudadModel.nombreCiudad}"
                         app:unirPais="@{pronosticoModel.ciudadModel.nombrePais}"
-                        tools:text="Villa Giardino, Córdoba Argentina" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_tiempo"
-                        app:tint="@color/colorWhite"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="10sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:convertirFecha="@{pronosticoModel.pronosticoActualModel.fechaActual}"
-                        tools:text="Lunes, 3 de Agosto" />
+                        tools:text="Córdoba AR" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorAccent"
+                    android:fontFamily="@font/montserrat"
                     android:textStyle="bold"
-                    android:textSize="50sp"
+                    android:textSize="65sp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     app:convertirTemperatura="@{pronosticoModel.pronosticoActualModel.temperaturaActual}"
@@ -89,19 +72,21 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="68dp"
-                    android:layout_gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="end"
                     app:imageUrl="@{pronosticoModel.pronosticoActualModel.iconoActual}"
                     tools:src="@drawable/ic_sol"
-                    tools:tint="@color/colorWhite" />
+                    tools:tint="@color/colorAccent" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
+                    android:gravity="center"
                     android:text="@{pronosticoModel.pronosticoActualModel.descripcionActual}"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10sp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="12sp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     tools:text="Soleado" />

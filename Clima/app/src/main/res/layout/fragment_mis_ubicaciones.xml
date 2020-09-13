@@ -9,19 +9,20 @@
             type="com.dsl.clima.viewmodel.MisUbicacionesViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/degradado_gris_oscuro">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_mis_ubicaciones"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="1"
             app:listaPronosticos="@{viewModel.listaPronosticoModel}"
             tools:itemCount="4"
             tools:listitem="@layout/mis_ubicaciones_item"/>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

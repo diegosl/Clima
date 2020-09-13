@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val pronosticoRepository: PronosticoRepository) : ViewModel() {
+class HomeViewModel(private val pronosticoRepository: PronosticoRepository, private val nombreCiudad: String) : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
@@ -28,14 +28,14 @@ class HomeViewModel(private val pronosticoRepository: PronosticoRepository) : Vi
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        refescarPronostico("Cordoba")
+        refescarPronostico()
     }
 
-    fun refescarPronostico(ciudad: String) {
+    fun refescarPronostico() {
         coroutineScope.launch {
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
-                _pronosticoModel.value = pronosticoRepository.refrescarPronostico(ciudad)
+                _pronosticoModel.value = pronosticoRepository.refrescarPronostico(nombreCiudad)
                 _estadoApi.value = EstadoApi.FINALIZADO
             }
             catch (e: Exception) {
@@ -43,6 +43,10 @@ class HomeViewModel(private val pronosticoRepository: PronosticoRepository) : Vi
                 _pronosticoModel.value = PronosticoModel()
             }
         }
+    }
+
+    fun getActualizarPronostico() {
+
     }
 
     /**

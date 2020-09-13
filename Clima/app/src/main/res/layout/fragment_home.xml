@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             shimmer:duration="800"
+            android:visibility="invisible"
             tools:visibility="invisible">
             <include layout="@layout/placeholder_home" />
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -36,7 +37,9 @@
                     android:id="@+id/layout_home"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    tools:visibility="visible">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
