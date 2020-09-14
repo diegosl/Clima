@@ -2,7 +2,7 @@
     <string name="app_name">Clima</string>
     <string name="mis_ubicaciones">Mis Ubicaciones</string>
     <string name="agregar_ubicacion">Agregar ubicación</string>
-    <string name="home">Home</string>
+    <string name="home">Pronostico</string>
     <string name="inicio">Inicio</string>
     <string name="search_hint">Buscar...</string>
     <string name="search_hint_agregar_ubicacion">Buscar ubicación...</string>

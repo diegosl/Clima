@@ -50,6 +50,12 @@ class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
         }
         return listaPronosticoModel
     }
+
+    suspend fun eliminarPronostico(nombreCiudad: String) {
+        withContext(Dispatchers.IO) {
+            dataLocal.eliminarPronosticoLocal(nombreCiudad)
+        }
+    }
 }
 
 fun transformarPronosticoRemoteModel(ciudadRemote: CiudadRemote, pronosticoRemote: PronosticoRemote) : PronosticoModel {

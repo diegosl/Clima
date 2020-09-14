@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navegacion"
-    app:startDestination="@id/nav_agregar_ubicacion">
+    app:startDestination="@id/nav_mis_ubicaciones">
 
     <fragment
         android:id="@+id/nav_mis_ubicaciones"
         android:name="com.dsl.clima.ui.MisUbicacionesFragment"
         android:label="@string/mis_ubicaciones"
         tools:layout="@layout/fragment_mis_ubicaciones" >
+        <action
+            android:id="@+id/action_nav_mis_ubicaciones_to_nav_agregar_ubicacion"
+            app:destination="@id/nav_agregar_ubicacion" />
         <action
             android:id="@+id/action_nav_mis_ubicaciones_to_nav_home"
             app:destination="@id/nav_home" />
@@ -28,9 +31,6 @@
         android:name="com.dsl.clima.ui.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_nav_home_to_nav_agregar_ubicacion"
-            app:destination="@id/nav_agregar_ubicacion" />
         <argument
             android:name="nombreCiudad"
             app:argType="string" />

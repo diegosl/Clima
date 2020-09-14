@@ -10,8 +10,8 @@ interface PronosticoDatabaseDao {
     @Update
     fun actualizarPronosticoLocal(pronosticoLocal: PronosticoLocal)
 
-    @Query("DELETE FROM tabla_pronostico_local")
-    fun eliminarPronosticoLocal()
+    @Query("DELETE FROM tabla_pronostico_local WHERE nombre_ciudad =:nombreCiudad ")
+    fun eliminarPronosticoLocal(nombreCiudad: String)
 
     @Query("SELECT * FROM tabla_pronostico_local ORDER BY fecha_actual DESC LIMIT 1")
     fun getPronosticoLocal(): PronosticoLocal

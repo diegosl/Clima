@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsl.clima.databinding.MisUbicacionesItemBinding
 import com.dsl.clima.domain.model.PronosticoModel
 
-class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
+class MisUbicacionesAdapter(private val onClickListener: OnClickListener, private val onLongClickListener: OnLongClickListener) :
     ListAdapter<PronosticoModel,
             MisUbicacionesAdapter.MisUbicacionesViewHolder>(DiffCallback) {
 
@@ -21,6 +21,10 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
         val pronosticoModel = getItem(position)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(pronosticoModel)
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongClickListener.onLongClick(pronosticoModel)
+            true
         }
         holder.bind(pronosticoModel)
     }
@@ -45,5 +49,9 @@ class MisUbicacionesAdapter( private val onClickListener: OnClickListener ) :
 
     class OnClickListener(val clickListener: (pronosticoModel: PronosticoModel) -> Unit) {
         fun onClick(pronosticoModel: PronosticoModel) = clickListener(pronosticoModel)
+    }
+
+    class OnLongClickListener(val longClickListener: (pronosticoModel: PronosticoModel) -> Unit) {
+        fun onLongClick(pronosticoModel: PronosticoModel) = longClickListener(pronosticoModel)
     }
 }

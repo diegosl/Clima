@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,20 +10,54 @@
             type="com.dsl.clima.viewmodel.MisUbicacionesViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/degradado_gris_oscuro">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_mis_ubicaciones"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_mis_ubicaciones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="1"
-            app:listaPronosticos="@{viewModel.listaPronosticoModel}"
-            tools:itemCount="4"
-            tools:listitem="@layout/mis_ubicaciones_item"/>
-    </androidx.core.widget.NestedScrollView>
+            shimmer:duration="800"
+            android:visibility="invisible"
+            tools:visibility="invisible">
+            <include layout="@layout/placeholder_home" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_mis_ubicaciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/degradado_gris_oscuro">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_mis_ubicaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:visibility="invisible"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="1"
+                    app:listaPronosticos="@{viewModel.listaPronosticoModel}"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/mis_ubicaciones_item"
+                    tools:visibility="visible"/>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_agregar_ubicacion"
+            style="@style/Widget.Design.FloatingActionButton"
+            android:background="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_mas"
+            app:tint="@color/colorWhite" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

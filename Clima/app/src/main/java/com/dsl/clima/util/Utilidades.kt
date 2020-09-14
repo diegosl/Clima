@@ -22,7 +22,7 @@ fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()}%"
 fun convertirVelocidad(velocidad: Double) = "$velocidad m/s"
 
 fun convertirFecha(tiempo: Int): String {
-    val fecha = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+    val fecha = SimpleDateFormat("dd/MM/yyyy hh:mm:ss a")
     return fecha.format(tiempo*1000L)
 }
 
@@ -42,6 +42,8 @@ fun convertirDia(tiempo: Int): String {
         else -> ""
     }
 }
+
+fun convertirCodigoNombrePais(codigoPais: String) = Locale(codigoPais).country
 
 @SuppressLint("ResourceAsColor")
 fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: View, swipeRefreshLayout: SwipeRefreshLayout) {

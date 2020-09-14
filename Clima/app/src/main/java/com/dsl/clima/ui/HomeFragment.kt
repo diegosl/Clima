@@ -23,6 +23,9 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var viewModelFactory: HomeViewModelFactory
 
+    val CIUDAD = "NOMBRE_CIUDAD"
+    val TAG = "HOME_FRAGMENT"
+
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +39,6 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel
-
-        binding.fabAgregarUbicacion.setOnClickListener {
-            this.findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavAgregarUbicacion())
-        }
 
         /**
          * Cuando el usuario desliza para actualizar swipeRefreshHome

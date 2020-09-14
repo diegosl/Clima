@@ -33,8 +33,23 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
         getMisUbicaciones()
     }
 
-    private fun getMisUbicaciones() {
+    fun getMisUbicaciones() {
         coroutineScope.launch {
+            try {
+                _estadoApi.value = EstadoApi.CARGANDO
+                _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
+                _estadoApi.value = EstadoApi.FINALIZADO
+            }
+            catch (e: Exception) {
+                _estadoApi.value = EstadoApi.ERROR
+                _listaPronosticoModel.value = ArrayList()
+            }
+        }
+    }
+
+    fun eliminarPronosticoActualizarListaPronostico(nombreCiudad: String) {
+        coroutineScope.launch {
+            pronosticoRepository.eliminarPronostico(nombreCiudad)
             _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
         }
     }

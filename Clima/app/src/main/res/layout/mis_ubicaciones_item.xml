@@ -63,6 +63,31 @@
                     android:ellipsize="end"
                     app:convertirTemperatura="@{pronosticoModel.pronosticoActualModel.temperaturaActual}"
                     tools:text="27°" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_tiempo"
+                        app:tint="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat"
+                        android:maxLines="1"
+                        app:convertirFecha="@{pronosticoModel.pronosticoActualModel.fechaActual}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp"
+                        tools:text="28/8/2020 22:37:10" />
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
