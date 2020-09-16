@@ -5,11 +5,11 @@
         android:id="@+id/group_1">
         <item
             android:id="@+id/nav_mis_ubicaciones"
-            android:icon="@drawable/ic_sol"
+            android:icon="@drawable/ic_ubicacion"
             android:title="@string/mis_ubicaciones" />
         <item
             android:id="@+id/nav_agregar_ubicacion"
-            android:icon="@drawable/ic_ubicacion"
+            android:icon="@drawable/ic_mas_circulo"
             android:title="@string/agregar_ubicacion" />
     </group>
     <group

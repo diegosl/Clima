@@ -40,13 +40,9 @@ class HomeViewModel(private val pronosticoRepository: PronosticoRepository, priv
             }
             catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
-                _pronosticoModel.value = PronosticoModel()
+                _pronosticoModel.value = pronosticoRepository.getPronostico(nombreCiudad)
             }
         }
-    }
-
-    fun getActualizarPronostico() {
-
     }
 
     /**

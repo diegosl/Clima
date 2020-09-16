@@ -24,3 +24,16 @@ data class PronosticoLocal(@PrimaryKey
                            val descripcionActual: String = "",
                            @ColumnInfo(name = "icono_actual")
                            val iconoActual: String = "")
+
+@Entity(tableName = "tabla_pronostico_extendido_local")
+data class PronosticoDiarioLocal(@PrimaryKey
+                           @ColumnInfo(name = "nombre_ciudad")
+                           val nombreCiudad: String = "",
+                           @ColumnInfo(name = "fecha_diaria")
+                           val fechaDiaria: Int = 0,
+                           @ColumnInfo(name = "temperatura_minima_diaria")
+                           val temperaturaMin: Double = 0.0,
+                           @ColumnInfo(name = "temperatura_maxima_diaria")
+                           val temperaturaMax: Double = 0.0,
+                           @ColumnInfo(name = "icono_diario")
+                           val iconoDiario: String = "")

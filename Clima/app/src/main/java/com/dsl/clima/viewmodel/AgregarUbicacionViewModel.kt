@@ -51,6 +51,7 @@ class AgregarUbicacionViewModel(private val pronosticoRepository: PronosticoRepo
         coroutineScope.launch {
             val pronosticoModel = PronosticoModel(ciudadModel = _ciudadModel.value!!)
             pronosticoRepository.insertarPronostico(pronosticoModel)
+            pronosticoRepository.insertarPronosticoDiario(pronosticoModel)
         }
     }
 

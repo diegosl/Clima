@@ -4,7 +4,9 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.dsl.clima.R
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -67,7 +69,7 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
             animatorSetAlpha.play(animatorAlpha)
             animatorSetAlpha.start()
 
-            Snackbar.make(view, "Comprobar la conexión de red", Snackbar.LENGTH_LONG).show()
+            mostrarSnackBar(view, view.context.getString(R.string.error_internet))
         }
         EstadoApi.FINALIZADO -> {
             swipeRefreshLayout.isRefreshing = false
@@ -81,4 +83,11 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
             animatorSetAlpha.start()
         }
     }
+}
+
+fun mostrarSnackBar(view: View, mensaje: String) {
+    Snackbar.make(view, mensaje, Snackbar.LENGTH_LONG)
+        .setBackgroundTint(ContextCompat.getColor(view.context, R.color.colorGray))
+        .setTextColor(ContextCompat.getColor(view.context, R.color.colorPrimaryDark))
+        .show()
 }

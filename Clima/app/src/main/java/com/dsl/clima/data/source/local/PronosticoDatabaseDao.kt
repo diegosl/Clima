@@ -10,15 +10,24 @@ interface PronosticoDatabaseDao {
     @Update
     fun actualizarPronosticoLocal(pronosticoLocal: PronosticoLocal)
 
-    @Query("DELETE FROM tabla_pronostico_local WHERE nombre_ciudad =:nombreCiudad ")
+    @Query("DELETE FROM tabla_pronostico_local WHERE nombre_ciudad =:nombreCiudad")
     fun eliminarPronosticoLocal(nombreCiudad: String)
 
-    @Query("SELECT * FROM tabla_pronostico_local ORDER BY fecha_actual DESC LIMIT 1")
-    fun getPronosticoLocal(): PronosticoLocal
-
     @Query("SELECT * FROM tabla_pronostico_local WHERE nombre_ciudad =:nombreCiudad LIMIT 1")
-    fun getPronosticoSeleccionadoLocal(nombreCiudad: String): PronosticoLocal
+    fun getPronosticoLocal(nombreCiudad: String): PronosticoLocal
 
     @Query("SELECT * FROM tabla_pronostico_local ORDER BY nombre_ciudad")
     fun getListaPronosticoLocal(): List<PronosticoLocal>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertarPronosticoDiarioLocal(listaPronosticoDiarioLocal: List<PronosticoDiarioLocal>)
+
+    @Update
+    fun actualizarPronosticoDiarioLocal(listaPronosticoDiarioLocal: List<PronosticoDiarioLocal>)
+
+    @Query("DELETE FROM tabla_pronostico_extendido_local WHERE nombre_ciudad =:nombreCiudad")
+    fun eliminarPronosticoDiarioLocal(nombreCiudad: String)
+
+    @Query("SELECT * FROM tabla_pronostico_extendido_local WHERE nombre_ciudad =:nombreCiudad")
+    fun getListaPronosticoDiarioLocal(nombreCiudad: String): List<PronosticoDiarioLocal>
 }

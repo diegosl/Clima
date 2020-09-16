@@ -8,4 +8,8 @@
     <string name="search_hint_agregar_ubicacion">Buscar ubicación...</string>
     <string name="error_internet">Comprobar la conexión de red</string>
     <string name="pronostico_extendido">Pronostico extendido</string>
+    <string name="eliminar_ubicacion">Ubicación eliminada</string>
+    <string name="titulo_dialog_mis_ubicaciones">¿Eliminar ubicación?</string>
+    <string name="cancelar_dialog_mis_ubicaciones">Cancelar</string>
+    <string name="eliminar_dialog_mis_ubicaciones">Eliminar</string>
 </resources>

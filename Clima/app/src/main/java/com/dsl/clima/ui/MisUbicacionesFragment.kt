@@ -16,6 +16,7 @@ import com.dsl.clima.data.source.local.PronosticoDatabase
 import com.dsl.clima.databinding.FragmentMisUbicacionesBinding
 import com.dsl.clima.util.EstadoApi
 import com.dsl.clima.util.efectoShimmer
+import com.dsl.clima.util.mostrarSnackBar
 import com.dsl.clima.viewmodel.MisUbicacionesViewModel
 import com.dsl.clima.viewmodel.MisUbicacionesViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -35,22 +36,20 @@ class MisUbicacionesFragment : Fragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel
 
-        binding.recyclerViewMisUbicaciones.adapter = MisUbicacionesAdapter(MisUbicacionesAdapter.OnClickListener {pronosticoModel ->
+        binding.recyclerViewMisUbicaciones.adapter = MisUbicacionesAdapter(
+            MisUbicacionesAdapter.OnClickListener {pronosticoModel ->
             this.findNavController().navigate(MisUbicacionesFragmentDirections.actionNavMisUbicacionesToNavHome(pronosticoModel.ciudadModel.nombreCiudad))
-        }, MisUbicacionesAdapter.OnLongClickListener { pronosticoModel ->
+        },
+            MisUbicacionesAdapter.OnLongClickListener { pronosticoModel ->
             MaterialAlertDialogBuilder(context)
-                .setTitle("¿Eliminar ubicación?")
+                .setTitle(getString(R.string.titulo_dialog_mis_ubicaciones))
                 .setMessage("Se eliminará ${pronosticoModel.ciudadModel.nombreCiudad}")
-                .setNegativeButton("Cancelar") { dialog, _ ->
-                    // Respond to negative button press
+                .setNegativeButton(getString(R.string.cancelar_dialog_mis_ubicaciones)) { dialog, _ ->
                     dialog.dismiss()
                 }
-                .setPositiveButton("Eliminar") { dialog, _ ->
-                    // Respond to positive button press
+                .setPositiveButton(getString(R.string.eliminar_dialog_mis_ubicaciones)) { dialog, _ ->
                     viewModel.eliminarPronosticoActualizarListaPronostico(pronosticoModel.ciudadModel.nombreCiudad)
-                    Snackbar.make(binding.recyclerViewMisUbicaciones, "Ciudad eliminada", Snackbar.LENGTH_LONG)
-                        .setBackgroundTint(ContextCompat.getColor(this.context!!, R.color.colorBlanco))
-                        .show()
+                    mostrarSnackBar(binding.recyclerViewMisUbicaciones, getString(R.string.eliminar_ubicacion))
                     dialog.dismiss()
                 }
                 .show()

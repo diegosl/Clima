@@ -56,11 +56,6 @@ private val retrofit = Retrofit.Builder()
  */
 interface PronosticoService {
     @GET("weather")
-    fun getListaDatosMeteorologicosActuales(@Query("q") cityName: String = "Cordoba",
-                                            @Query("lang") idioma: String = LANGUAGE,
-                                            @Query("appid") apiKey: String = API_KEY): Deferred<List<PronosticoActualModel>>
-
-    @GET("weather")
     fun getCiudad(@Query("q") cityName: String = "Cordoba",
                   @Query("lang") idioma: String = LANGUAGE,
                   @Query("appid") apiKey: String = API_KEY): Deferred<CiudadRemote>

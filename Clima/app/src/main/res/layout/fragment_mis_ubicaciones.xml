@@ -42,7 +42,7 @@
                     android:visibility="invisible"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="1"
-                    app:listaPronosticos="@{viewModel.listaPronosticoModel}"
+                    app:listaPronostico="@{viewModel.listaPronosticoModel}"
                     tools:itemCount="4"
                     tools:listitem="@layout/mis_ubicaciones_item"
                     tools:visibility="visible"/>

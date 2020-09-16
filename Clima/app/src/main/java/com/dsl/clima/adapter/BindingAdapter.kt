@@ -9,7 +9,7 @@ import com.dsl.clima.domain.model.PronosticoDiarioModel
 import com.dsl.clima.domain.model.PronosticoModel
 import com.dsl.clima.util.*
 
-@BindingAdapter("listaPronosticos")
+@BindingAdapter("listaPronostico")
 fun bindRecyclerViewPronostico(recyclerView: RecyclerView, data: List<PronosticoModel>?) {
     val adapter = recyclerView.adapter as MisUbicacionesAdapter
     adapter.submitList(data)
