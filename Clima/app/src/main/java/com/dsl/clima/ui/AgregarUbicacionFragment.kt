@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
+import com.dsl.clima.adapter.AgregarUbicacionAdapter
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.data.source.local.PronosticoDatabase.Companion.getDatebase
 import com.dsl.clima.databinding.FragmentAgregarUbicacionBinding
@@ -38,24 +39,25 @@ class AgregarUbicacionFragment : Fragment() {
         viewModel.estadoApi.observe(this, Observer {
             when(it) {
                 EstadoApi.CARGANDO -> {
-                    binding.layoutResultadoCiudad.visibility = View.GONE
+                    binding.recyclerViewAgregarUbicacion.visibility = View.GONE
                     binding.layoutNoResultadoCiudad.visibility = View.GONE
                 }
                 EstadoApi.FINALIZADO -> {
-                    binding.layoutResultadoCiudad.visibility = View.VISIBLE
+                    binding.recyclerViewAgregarUbicacion.visibility = View.VISIBLE
                     binding.layoutNoResultadoCiudad.visibility = View.GONE
                 }
                 EstadoApi.ERROR -> {
-                    binding.layoutResultadoCiudad.visibility = View.GONE
+                    binding.recyclerViewAgregarUbicacion.visibility = View.GONE
                     binding.layoutNoResultadoCiudad.visibility = View.VISIBLE
                 }
             }
         })
 
-        binding.layoutResultadoCiudad.setOnClickListener {
-            viewModel.insertarPronostico()
-            this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome(viewModel.ciudadModel.value!!.nombreCiudad))
-        }
+        binding.recyclerViewAgregarUbicacion.adapter = AgregarUbicacionAdapter(
+            AgregarUbicacionAdapter.OnClickListener {
+                viewModel.insertarPronostico(it)
+                this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome(it.nombreCiudad))
+        })
 
         /**
          * Se habilita opciones de menu a fragmento [AgregarUbicacionFragment]

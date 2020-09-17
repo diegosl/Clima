@@ -1,8 +1,7 @@
 package com.dsl.clima.data.source.local
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.google.gson.Gson
 
 @Entity(tableName = "tabla_pronostico_local")
 data class PronosticoLocal(@PrimaryKey
@@ -23,17 +22,19 @@ data class PronosticoLocal(@PrimaryKey
                            @ColumnInfo(name = "descripcion_actual")
                            val descripcionActual: String = "",
                            @ColumnInfo(name = "icono_actual")
-                           val iconoActual: String = "")
+                           val iconoActual: String = "",
+                           @ColumnInfo(name = "lista_pronostico_diario")
+                           val listaPronosticoDiarioLocal: List<PronosticoDiarioLocal> = listOf(PronosticoDiarioLocal()))
 
-@Entity(tableName = "tabla_pronostico_extendido_local")
-data class PronosticoDiarioLocal(@PrimaryKey
-                           @ColumnInfo(name = "nombre_ciudad")
-                           val nombreCiudad: String = "",
-                           @ColumnInfo(name = "fecha_diaria")
-                           val fechaDiaria: Int = 0,
-                           @ColumnInfo(name = "temperatura_minima_diaria")
-                           val temperaturaMin: Double = 0.0,
-                           @ColumnInfo(name = "temperatura_maxima_diaria")
-                           val temperaturaMax: Double = 0.0,
-                           @ColumnInfo(name = "icono_diario")
-                           val iconoDiario: String = "")
+data class PronosticoDiarioLocal(val fechaDiaria: Int = 0,
+                                 val temperaturaMin: Double = 0.0,
+                                 val temperaturaMax: Double = 0.0,
+                                 val iconoDiario: String = "")
+
+class Converters {
+    @TypeConverter
+    fun listToJson(value: List<PronosticoDiarioLocal>?) = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonToList(value: String) = Gson().fromJson(value, Array<PronosticoDiarioLocal>::class.java).toList()
+}

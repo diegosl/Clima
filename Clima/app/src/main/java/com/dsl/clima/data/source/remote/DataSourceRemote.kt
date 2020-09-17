@@ -34,3 +34,5 @@ data class PronosticoRemote(@Json(name = "lat") val latitud: Double = 0.0,
                             @Json(name = "lon") val longitud: Double = 0.0,
                             @Json(name = "current") val pronosticoActual: PronosticoActualRemote = PronosticoActualRemote(),
                             @Json(name = "daily") val pronosticoDiario: List<PronosticoDiarioRemote> = listOf(PronosticoDiarioRemote()))
+
+data class ListaCiudadRemote(@Json(name = "list") val listaCiudadRemote: List<CiudadRemote> = listOf(CiudadRemote()))

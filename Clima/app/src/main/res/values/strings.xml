@@ -12,4 +12,5 @@
     <string name="titulo_dialog_mis_ubicaciones">¿Eliminar ubicación?</string>
     <string name="cancelar_dialog_mis_ubicaciones">Cancelar</string>
     <string name="eliminar_dialog_mis_ubicaciones">Eliminar</string>
+    <string name="base_de_datos_vacia_mis_ubicaciones">No hay ubicaciones</string>
 </resources>

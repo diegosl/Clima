@@ -65,7 +65,7 @@ class MisUbicacionesFragment : Fragment() {
         }
 
         viewModel.estadoApi.observe(this, Observer {
-            efectoShimmer(it, binding.shimmerMisUbicaciones, binding.recyclerViewMisUbicaciones, binding.swipeRefreshMisUbicaciones)
+            efectoShimmer(it, binding.shimmerMisUbicaciones, binding.recyclerViewMisUbicaciones, binding.swipeRefreshMisUbicaciones, getString(R.string.base_de_datos_vacia_mis_ubicaciones))
         })
 
         return binding.root

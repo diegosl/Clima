@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
          * En caso que se produzca un error ERROR, mostrara un SnackBar.
          */
         viewModel.estadoApi.observe(this, Observer {
-            efectoShimmer(it, binding.shimmerHome, binding.layoutHome, binding.swipeRefreshHome)
+            efectoShimmer(it, binding.shimmerHome, binding.layoutHome, binding.swipeRefreshHome, getString(R.string.error_internet))
         })
 
         binding.recyclerViewPronosticoExtendido.adapter = PronosticoExtendidoAdapter(PronosticoExtendidoAdapter.OnClickListener {

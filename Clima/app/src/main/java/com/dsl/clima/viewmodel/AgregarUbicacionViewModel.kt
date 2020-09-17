@@ -18,9 +18,9 @@ class AgregarUbicacionViewModel(private val pronosticoRepository: PronosticoRepo
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main )
 
-    private val _ciudadModel = MutableLiveData<CiudadModel>()
-    val ciudadModel: LiveData<CiudadModel>
-        get() = _ciudadModel
+    private val _listaCiudadModel = MutableLiveData<List<CiudadModel>>()
+    val listaCiudadModel: LiveData<List<CiudadModel>>
+        get() = _listaCiudadModel
 
     private val _estadoApi = MutableLiveData<EstadoApi>()
     val estadoApi: LiveData<EstadoApi>
@@ -37,21 +37,20 @@ class AgregarUbicacionViewModel(private val pronosticoRepository: PronosticoRepo
         coroutineScope.launch {
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
-                _ciudadModel.value = pronosticoRepository.getCiudad(nombreCiudad)
+                _listaCiudadModel.value = pronosticoRepository.getListaCiudad(nombreCiudad)
                 _estadoApi.value = EstadoApi.FINALIZADO
             }
             catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
-                _ciudadModel.value = CiudadModel()
+                _listaCiudadModel.value = listOf(CiudadModel())
             }
         }
     }
 
-    fun insertarPronostico() {
+    fun insertarPronostico(ciudadModel: CiudadModel) {
         coroutineScope.launch {
-            val pronosticoModel = PronosticoModel(ciudadModel = _ciudadModel.value!!)
+            val pronosticoModel = PronosticoModel(ciudadModel = ciudadModel)
             pronosticoRepository.insertarPronostico(pronosticoModel)
-            pronosticoRepository.insertarPronosticoDiario(pronosticoModel)
         }
     }
 

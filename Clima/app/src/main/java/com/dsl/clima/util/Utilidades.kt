@@ -48,7 +48,7 @@ fun convertirDia(tiempo: Int): String {
 fun convertirCodigoNombrePais(codigoPais: String) = Locale(codigoPais).country
 
 @SuppressLint("ResourceAsColor")
-fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: View, swipeRefreshLayout: SwipeRefreshLayout) {
+fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: View, swipeRefreshLayout: SwipeRefreshLayout, mensaje: String) {
     val animatorAlpha: ObjectAnimator
     val animatorSetAlpha = AnimatorSet()
 
@@ -69,7 +69,7 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
             animatorSetAlpha.play(animatorAlpha)
             animatorSetAlpha.start()
 
-            mostrarSnackBar(view, view.context.getString(R.string.error_internet))
+            mostrarSnackBar(view, mensaje)
         }
         EstadoApi.FINALIZADO -> {
             swipeRefreshLayout.isRefreshing = false
@@ -87,7 +87,7 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
 
 fun mostrarSnackBar(view: View, mensaje: String) {
     Snackbar.make(view, mensaje, Snackbar.LENGTH_LONG)
-        .setBackgroundTint(ContextCompat.getColor(view.context, R.color.colorGray))
+        .setBackgroundTint(ContextCompat.getColor(view.context, R.color.colorGrayLight))
         .setTextColor(ContextCompat.getColor(view.context, R.color.colorPrimaryDark))
         .show()
 }

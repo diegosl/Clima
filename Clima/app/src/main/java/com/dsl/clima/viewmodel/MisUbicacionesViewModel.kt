@@ -50,7 +50,6 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
     fun eliminarPronosticoActualizarListaPronostico(nombreCiudad: String) {
         coroutineScope.launch {
             pronosticoRepository.eliminarPronostico(nombreCiudad)
-            pronosticoRepository.eliminarPronosticoDiario(nombreCiudad)
             _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
         }
     }
