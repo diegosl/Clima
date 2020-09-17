@@ -5,6 +5,8 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tabla_pronostico_local")
 data class PronosticoLocal(@PrimaryKey
+                           @ColumnInfo(name = "id_ciudad")
+                           val idCiudad: Int = -1,
                            @ColumnInfo(name = "nombre_ciudad")
                            val nombreCiudad: String = "",
                            @ColumnInfo(name = "nombre_pais")

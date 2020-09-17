@@ -4,7 +4,8 @@ data class PronosticoModel(val ciudadModel: CiudadModel = CiudadModel(),
                            val pronosticoActualModel: PronosticoActualModel = PronosticoActualModel(),
                            val listaPronosticoDiarioModel: List<PronosticoDiarioModel> = listOf(PronosticoDiarioModel()))
 
-data class CiudadModel(val nombreCiudad: String = "",
+data class CiudadModel(val idCiudad: Int = -1,
+                       val nombreCiudad: String = "",
                        val nombrePais: String = "")
 
 data class PronosticoActualModel(val fechaActual: Int = 0,

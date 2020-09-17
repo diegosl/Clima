@@ -12,10 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
-    suspend fun refrescarPronostico(nombreCiudad: String): PronosticoModel {
+    suspend fun refrescarPronostico(idCiudad: Int): PronosticoModel {
         var pronosticoModel = PronosticoModel()
         withContext(Dispatchers.IO) {
-            val ciudadRemote = apiService.retrofitService.getCiudad(nombreCiudad).await()
+            val ciudadRemote = apiService.retrofitService.getCiudad(idCiudad).await()
             val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
             pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
             val pronosticoLocal = transformarPronosticoModelLocal(pronosticoModel)
@@ -48,17 +48,17 @@ class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
         return listaPronosticoModel
     }
 
-    suspend fun getPronostico(nombreCiudad: String): PronosticoModel {
+    suspend fun getPronostico(idCiudad: Int): PronosticoModel {
         var pronosticoModel = PronosticoModel()
         withContext(Dispatchers.IO) {
-            pronosticoModel = transformarPronosticoLocalModel(dataLocal.getPronosticoLocal(nombreCiudad))
+            pronosticoModel = transformarPronosticoLocalModel(dataLocal.getPronosticoLocal(idCiudad))
         }
         return pronosticoModel
     }
 
-    suspend fun eliminarPronostico(nombreCiudad: String) {
+    suspend fun eliminarPronostico(idCiudad: Int) {
         withContext(Dispatchers.IO) {
-            dataLocal.eliminarPronosticoLocal(nombreCiudad)
+            dataLocal.eliminarPronosticoLocal(idCiudad)
         }
     }
 }
@@ -66,6 +66,7 @@ class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
 fun transformarPronosticoRemoteModel(ciudadRemote: CiudadRemote, pronosticoRemote: PronosticoRemote) : PronosticoModel {
     return PronosticoModel(
         CiudadModel(
+            ciudadRemote.id,
             ciudadRemote.nombreCiudad,
             ciudadRemote.sys.nombrePais),
         PronosticoActualModel(
@@ -94,12 +95,13 @@ fun transformarListaPronosticoDiarioRemoteModel(listaPronosticoDiarioRemote: Lis
 
 fun transformarListaCiudadRemoteModel(listaCiudadRemote: ListaCiudadRemote): List<CiudadModel> {
     return listaCiudadRemote.listaCiudadRemote.map {
-        CiudadModel(it.nombreCiudad, it.sys.nombrePais)
+        CiudadModel(it.id, it.nombreCiudad, it.sys.nombrePais)
     }
 }
 
 fun transformarPronosticoModelLocal(pronosticoModel: PronosticoModel) : PronosticoLocal {
     return PronosticoLocal(
+        pronosticoModel.ciudadModel.idCiudad,
         pronosticoModel.ciudadModel.nombreCiudad,
         pronosticoModel.ciudadModel.nombrePais,
         pronosticoModel.pronosticoActualModel.fechaActual,
@@ -117,6 +119,7 @@ fun transformarListaPronosticoLocalModel(listaPronosticoLocal: List<PronosticoLo
     return listaPronosticoLocal.map {
         PronosticoModel(
             CiudadModel(
+                it.idCiudad,
                 it.nombreCiudad,
                 it.nombrePais),
             PronosticoActualModel(
@@ -135,6 +138,7 @@ fun transformarListaPronosticoLocalModel(listaPronosticoLocal: List<PronosticoLo
 fun transformarPronosticoLocalModel(pronosticoLocal: PronosticoLocal) : PronosticoModel {
     return PronosticoModel(
         CiudadModel(
+            pronosticoLocal.idCiudad,
             pronosticoLocal.nombreCiudad,
             pronosticoLocal.nombrePais),
         PronosticoActualModel(

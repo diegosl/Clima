@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.data.repository.PronosticoRepository
-import com.dsl.clima.data.source.remote.apiService
-import com.dsl.clima.domain.model.PronosticoActualModel
 import com.dsl.clima.domain.model.PronosticoModel
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
@@ -47,9 +45,9 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
         }
     }
 
-    fun eliminarPronosticoActualizarListaPronostico(nombreCiudad: String) {
+    fun eliminarPronosticoActualizarListaPronostico(idCiudad: Int) {
         coroutineScope.launch {
-            pronosticoRepository.eliminarPronostico(nombreCiudad)
+            pronosticoRepository.eliminarPronostico(idCiudad)
             _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
         }
     }

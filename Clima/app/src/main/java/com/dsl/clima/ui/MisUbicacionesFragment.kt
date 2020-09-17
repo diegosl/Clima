@@ -38,7 +38,7 @@ class MisUbicacionesFragment : Fragment() {
 
         binding.recyclerViewMisUbicaciones.adapter = MisUbicacionesAdapter(
             MisUbicacionesAdapter.OnClickListener {pronosticoModel ->
-            this.findNavController().navigate(MisUbicacionesFragmentDirections.actionNavMisUbicacionesToNavHome(pronosticoModel.ciudadModel.nombreCiudad))
+            this.findNavController().navigate(MisUbicacionesFragmentDirections.actionNavMisUbicacionesToNavHome(pronosticoModel.ciudadModel.idCiudad))
         },
             MisUbicacionesAdapter.OnLongClickListener { pronosticoModel ->
             MaterialAlertDialogBuilder(context)
@@ -48,7 +48,7 @@ class MisUbicacionesFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton(getString(R.string.eliminar_dialog_mis_ubicaciones)) { dialog, _ ->
-                    viewModel.eliminarPronosticoActualizarListaPronostico(pronosticoModel.ciudadModel.nombreCiudad)
+                    viewModel.eliminarPronosticoActualizarListaPronostico(pronosticoModel.ciudadModel.idCiudad)
                     mostrarSnackBar(binding.recyclerViewMisUbicaciones, getString(R.string.eliminar_ubicacion))
                     dialog.dismiss()
                 }

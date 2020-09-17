@@ -32,7 +32,7 @@
         android:label="@string/home"
         tools:layout="@layout/fragment_home" >
         <argument
-            android:name="nombreCiudad"
-            app:argType="string" />
+            android:name="idCiudad"
+            app:argType="integer" />
     </fragment>
 </navigation>

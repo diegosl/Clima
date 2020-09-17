@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.dsl.clima.R
 import com.dsl.clima.adapter.PronosticoExtendidoAdapter
 import com.dsl.clima.databinding.FragmentHomeBinding
@@ -23,9 +22,6 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var viewModelFactory: HomeViewModelFactory
 
-    val CIUDAD = "NOMBRE_CIUDAD"
-    val TAG = "HOME_FRAGMENT"
-
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +29,9 @@ class HomeFragment : Fragment() {
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)
 
-        val nombreCiudad = HomeFragmentArgs.fromBundle(requireArguments()).nombreCiudad
+        val idCiudad = HomeFragmentArgs.fromBundle(requireArguments()).idCiudad
 
-        viewModelFactory = HomeViewModelFactory(PronosticoRepository(getDatebase(activity!!.applicationContext).pronosticoDatabaseDao), nombreCiudad)
+        viewModelFactory = HomeViewModelFactory(PronosticoRepository(getDatebase(activity!!.applicationContext).pronosticoDatabaseDao), idCiudad)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = viewModel

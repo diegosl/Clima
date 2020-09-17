@@ -56,7 +56,7 @@ class AgregarUbicacionFragment : Fragment() {
         binding.recyclerViewAgregarUbicacion.adapter = AgregarUbicacionAdapter(
             AgregarUbicacionAdapter.OnClickListener {
                 viewModel.insertarPronostico(it)
-                this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome(it.nombreCiudad))
+                this.findNavController().navigate(AgregarUbicacionFragmentDirections.actionNavAgregarUbicacionToNavHome(it.idCiudad))
         })
 
         /**
