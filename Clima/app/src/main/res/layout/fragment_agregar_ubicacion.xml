@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,6 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/degradado_gris_oscuro">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_agregar_ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            shimmer:duration="800"
+            android:visibility="invisible"
+            tools:visibility="invisible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/placeholder_agregar_ubicacion" />
+                <include layout="@layout/placeholder_agregar_ubicacion" />
+                <include layout="@layout/placeholder_agregar_ubicacion" />
+                <include layout="@layout/placeholder_agregar_ubicacion" />
+                <include layout="@layout/placeholder_agregar_ubicacion" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -45,7 +65,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_ubicacion"
-                android:tint="@color/colorWhite" />
+                android:tint="@color/colorBlanco" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +75,37 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1"
-                android:text="No se encontró Ciudad..."
+                android:text="@string/no_se_encontro_ubicacion"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_buscar_ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="invisible"
+            tools:visibility="invisible">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_buscar"
+                android:tint="@color/colorBlanco" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat"
+                android:maxLines="1"
+                android:text="@string/buscar_ubicacion"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />

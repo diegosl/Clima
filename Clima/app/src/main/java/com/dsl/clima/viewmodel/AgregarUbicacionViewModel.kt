@@ -26,15 +26,20 @@ class AgregarUbicacionViewModel(private val pronosticoRepository: PronosticoRepo
     val estadoApi: LiveData<EstadoApi>
         get() = _estadoApi
 
+    private val _estadoBusqueda = MutableLiveData<Boolean>()
+    val estadoBusqueda: LiveData<Boolean>
+        get() = _estadoBusqueda
+
     /**
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        getCiudad("")
+        _estadoBusqueda.value = true
     }
 
     fun getCiudad(nombreCiudad: String) {
         coroutineScope.launch {
+            _estadoBusqueda.value = false
             try {
                 _estadoApi.value = EstadoApi.CARGANDO
                 _listaCiudadModel.value = pronosticoRepository.getListaCiudad(nombreCiudad)

@@ -1,6 +1,5 @@
 package com.dsl.clima.data.source.remote
 
-import com.dsl.clima.domain.model.PronosticoActualModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -13,4 +13,6 @@
     <string name="cancelar_dialog_mis_ubicaciones">Cancelar</string>
     <string name="eliminar_dialog_mis_ubicaciones">Eliminar</string>
     <string name="base_de_datos_vacia_mis_ubicaciones">No hay ubicaciones</string>
+    <string name="no_se_encontro_ubicacion">No se encontró ubicación...</string>
+    <string name="buscar_ubicacion">Buscar ubicación</string>
 </resources>
