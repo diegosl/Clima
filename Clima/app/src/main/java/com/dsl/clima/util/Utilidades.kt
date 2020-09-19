@@ -54,13 +54,13 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
 
     when(estadoApi) {
         EstadoApi.CARGANDO -> {
-            shimmerView.startShimmerAnimation()
+            shimmerView.startShimmer()
             shimmerView.visibility = View.VISIBLE
             view.visibility = View.GONE
         }
         EstadoApi.ERROR -> {
             swipeRefreshLayout.isRefreshing = false
-            shimmerView.stopShimmerAnimation()
+            shimmerView.stopShimmer()
             shimmerView.visibility = View.GONE
             view.visibility = View.VISIBLE
 
@@ -73,7 +73,7 @@ fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: V
         }
         EstadoApi.FINALIZADO -> {
             swipeRefreshLayout.isRefreshing = false
-            shimmerView.stopShimmerAnimation()
+            shimmerView.stopShimmer()
             shimmerView.visibility = View.GONE
             view.visibility = View.VISIBLE
 

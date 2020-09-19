@@ -39,19 +39,19 @@ class AgregarUbicacionFragment : Fragment() {
         viewModel.estadoApi.observe(this, Observer {
             when(it) {
                 EstadoApi.CARGANDO -> {
-                    binding.shimmerAgregarUbicacion.startShimmerAnimation()
+                    binding.shimmerAgregarUbicacion.startShimmer()
                     binding.shimmerAgregarUbicacion.visibility = View.VISIBLE
                     binding.recyclerViewAgregarUbicacion.visibility = View.GONE
                     binding.layoutNoResultadoCiudad.visibility = View.GONE
                 }
                 EstadoApi.FINALIZADO -> {
-                    binding.shimmerAgregarUbicacion.stopShimmerAnimation()
+                    binding.shimmerAgregarUbicacion.stopShimmer()
                     binding.shimmerAgregarUbicacion.visibility = View.GONE
                     binding.recyclerViewAgregarUbicacion.visibility = View.VISIBLE
                     binding.layoutNoResultadoCiudad.visibility = View.GONE
                 }
                 EstadoApi.ERROR -> {
-                    binding.shimmerAgregarUbicacion.stopShimmerAnimation()
+                    binding.shimmerAgregarUbicacion.stopShimmer()
                     binding.shimmerAgregarUbicacion.visibility = View.GONE
                     binding.recyclerViewAgregarUbicacion.visibility = View.GONE
                     binding.layoutNoResultadoCiudad.visibility = View.VISIBLE

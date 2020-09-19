@@ -14,13 +14,11 @@ import com.dsl.clima.adapter.MisUbicacionesAdapter
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.data.source.local.PronosticoDatabase
 import com.dsl.clima.databinding.FragmentMisUbicacionesBinding
-import com.dsl.clima.util.EstadoApi
 import com.dsl.clima.util.efectoShimmer
 import com.dsl.clima.util.mostrarSnackBar
 import com.dsl.clima.viewmodel.MisUbicacionesViewModel
 import com.dsl.clima.viewmodel.MisUbicacionesViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 
 class MisUbicacionesFragment : Fragment() {
     private lateinit var viewModel: MisUbicacionesViewModel
