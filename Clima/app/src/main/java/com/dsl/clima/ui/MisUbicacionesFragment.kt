@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import com.dsl.clima.adapter.MisUbicacionesAdapter
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.data.source.local.PronosticoDatabase
 import com.dsl.clima.databinding.FragmentMisUbicacionesBinding
-import com.dsl.clima.util.efectoShimmer
 import com.dsl.clima.util.mostrarSnackBar
 import com.dsl.clima.viewmodel.MisUbicacionesViewModel
 import com.dsl.clima.viewmodel.MisUbicacionesViewModelFactory
@@ -57,13 +55,19 @@ class MisUbicacionesFragment : Fragment() {
             this.findNavController().navigate(MisUbicacionesFragmentDirections.actionNavMisUbicacionesToNavAgregarUbicacion())
         }
 
-        binding.swipeRefreshMisUbicaciones.setColorSchemeColors(ContextCompat.getColor(this.context!!, R.color.colorPrimary))
-        binding.swipeRefreshMisUbicaciones.setOnRefreshListener {
-            viewModel.getMisUbicaciones()
-        }
-
-        viewModel.estadoApi.observe(this, Observer {
-            efectoShimmer(it, binding.shimmerMisUbicaciones, binding.recyclerViewMisUbicaciones, binding.swipeRefreshMisUbicaciones, getString(R.string.base_de_datos_vacia_mis_ubicaciones))
+        viewModel.estadoBasedatos.observe(this, Observer {
+            when(it) {
+                true -> {
+                    binding.shimmerMisUbicaciones.stopShimmer()
+                    binding.shimmerMisUbicaciones.visibility = View.GONE
+                    binding.recyclerViewMisUbicaciones.visibility = View.VISIBLE
+                }
+                false -> {
+                    binding.shimmerMisUbicaciones.startShimmer()
+                    binding.shimmerMisUbicaciones.visibility = View.VISIBLE
+                    binding.recyclerViewMisUbicaciones.visibility = View.GONE
+                }
+            }
         })
 
         return binding.root

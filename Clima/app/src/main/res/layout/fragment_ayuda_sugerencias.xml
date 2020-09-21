@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/titulo_ayuda"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_ayuda_clima_app"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/mis_ubicaciones"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_ayuda_mis_ubicaciones"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/agregar_ubicacion"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_ayuda_agregar_ubicacion"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/home"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_ayuda_pronostico"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/configuracion"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_ayuda_configuracion"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/informacion_version"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:src="@mipmap/ic_launcher_round"
+                android:contentDescription="@string/app_name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="start"
+                android:text="@string/descripcion_version"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -19,33 +19,27 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
             tools:visibility="invisible">
-            <include layout="@layout/placeholder_home" />
+            <include layout="@layout/placeholder_mis_ubicaciones" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_mis_ubicaciones"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/degradado_gris_oscuro">
 
-            <androidx.core.widget.NestedScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_mis_ubicaciones"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/degradado_gris_oscuro">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_mis_ubicaciones"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:visibility="invisible"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="1"
-                    app:listaPronostico="@{viewModel.listaPronosticoModel}"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/mis_ubicaciones_item"
-                    tools:visibility="visible"/>
-            </androidx.core.widget.NestedScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:padding="8dp"
+                android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="1"
+                app:listaPronostico="@{viewModel.listaPronosticoModel}"
+                tools:itemCount="4"
+                tools:listitem="@layout/mis_ubicaciones_item"
+                tools:visibility="visible"/>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_agregar_ubicacion"

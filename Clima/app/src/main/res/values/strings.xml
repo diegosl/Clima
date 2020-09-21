@@ -2,17 +2,32 @@
     <string name="app_name">Clima</string>
     <string name="mis_ubicaciones">Mis Ubicaciones</string>
     <string name="agregar_ubicacion">Agregar ubicación</string>
-    <string name="home">Pronostico</string>
+    <string name="home">Pronóstico</string>
     <string name="inicio">Inicio</string>
+    <string name="configuracion">Configuración</string>
+    <string name="ayuda_y_sugerencias">Ayuda y sugerencias</string>
     <string name="search_hint">Buscar...</string>
     <string name="search_hint_agregar_ubicacion">Buscar ubicación...</string>
     <string name="error_internet">Comprobar la conexión de red</string>
-    <string name="pronostico_extendido">Pronostico extendido</string>
+    <string name="pronostico_extendido">Pronóstico extendido</string>
     <string name="eliminar_ubicacion">Ubicación eliminada</string>
     <string name="titulo_dialog_mis_ubicaciones">¿Eliminar ubicación?</string>
     <string name="cancelar_dialog_mis_ubicaciones">Cancelar</string>
     <string name="eliminar_dialog_mis_ubicaciones">Eliminar</string>
-    <string name="base_de_datos_vacia_mis_ubicaciones">No hay ubicaciones</string>
     <string name="no_se_encontro_ubicacion">No se encontró ubicación...</string>
     <string name="buscar_ubicacion">Buscar ubicación</string>
+    <string name="titulo_ayuda">¿Cómo usar Clima app?</string>
+    <string name="descripcion_ayuda_clima_app">Puedes consultar el clima de cualquier ubicación del mundo por medio de Clima.</string>
+    <string name="descripcion_ayuda_mis_ubicaciones">La página Mis ubicaciones muestra las ubicaciones que fueron buscadas en la pantalla Agregar ubicación.
+        Cada una de las ubicaciones se muestran en tarjetas. Cada tarjeta tiene el nombre de la ciudad con el código de país, la temperatura actual en grado celsius, la descripción del clima actual, el icono del clima actual y la fecha de actualización actual.
+        Para eliminar una ubicación mantener pulsado por unos segundos sobre la tarjeta y luego aparecerá una ventana emergente para confirmar la eliminación.
+        Para ver mas detalles del pronóstico de la ubicación pulsar sobre la tarjeta.</string>
+    <string name="descripcion_ayuda_agregar_ubicacion">La página Agregar ubicación contiene en la parte superior derecha el icono de búsqueda que permitirá efectuar una busqueda de la ubicación que se introduzca.
+        Solo se debe intoducir mediante el teclado virtual el nombre de la ciudad. Luego apareceran los resultados de la búsqueda. En caso contrario mostrará un mensaje de error.
+        Si se pulsa sobre uno de los resultados se mostrará el detalle del pronóstico de la ciudad seleccionada y además se agregará a Mis ubicaciones.</string>
+    <string name="descripcion_ayuda_pronostico">La página Pronóstico muestra el detalle del pronóstico de la ciudad seleccionada. Como el nombre de ciudad con el código de país, la temperatura actual, temperatura mínima, temperatura máxima,
+        icono del clima actual, descripción del clima actual, el porcentaje de nubosidad, la velocidad del viento en metros por segundo, el porcentaje de humedad, el pronóstico extendido y la fecha de actualización.</string>
+    <string name="descripcion_ayuda_configuracion">Proximamente.</string>
+    <string name="informacion_version">Información sobre la versión</string>
+    <string name="descripcion_version">Versión 1.0</string>
 </resources>

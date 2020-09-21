@@ -20,9 +20,9 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
     val listaPronosticoModel: LiveData<List<PronosticoModel>>
         get() = _listaPronosticoModel
 
-    private val _estadoApi = MutableLiveData<EstadoApi>()
-    val estadoApi: LiveData<EstadoApi>
-        get() = _estadoApi
+    private val _estadoBasedatos = MutableLiveData<Boolean>()
+    val estadoBasedatos: LiveData<Boolean>
+        get() = _estadoBasedatos
 
     /**
      * Inicializa el modelo de vista viewModel.
@@ -33,15 +33,9 @@ class MisUbicacionesViewModel(private val pronosticoRepository: PronosticoReposi
 
     fun getMisUbicaciones() {
         coroutineScope.launch {
-            try {
-                _estadoApi.value = EstadoApi.CARGANDO
-                _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
-                _estadoApi.value = EstadoApi.FINALIZADO
-            }
-            catch (e: Exception) {
-                _estadoApi.value = EstadoApi.ERROR
-                _listaPronosticoModel.value = ArrayList()
-            }
+            _estadoBasedatos.value = false
+            _listaPronosticoModel.value = pronosticoRepository.getListaPronostico()
+            _estadoBasedatos.value = true
         }
     }
 

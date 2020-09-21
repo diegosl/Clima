@@ -35,4 +35,22 @@
             android:name="idCiudad"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_configuracion"
+        android:name="com.dsl.clima.ui.ConfiguracionFragment"
+        android:label="@string/configuracion"
+        tools:layout="@layout/fragment_configuracion">
+        <action
+            android:id="@+id/action_nav_configuracion_to_nav_mis_ubicaciones"
+            app:destination="@id/nav_mis_ubicaciones" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_ayuda"
+        android:name="com.dsl.clima.ui.AyudaSugerenciasFragment"
+        android:label="@string/ayuda_y_sugerencias"
+        tools:layout="@layout/fragment_ayuda_sugerencias">
+        <action
+            android:id="@+id/action_nav_ayuda_to_nav_mis_ubicaciones"
+            app:destination="@id/nav_mis_ubicaciones" />
+    </fragment>
 </navigation>
