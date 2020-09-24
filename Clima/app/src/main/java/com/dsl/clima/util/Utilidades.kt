@@ -11,6 +11,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 enum class EstadoApi { CARGANDO, ERROR, FINALIZADO }
@@ -19,7 +20,7 @@ fun unirCiudadPais(ciudad: String, pais: String) = "$ciudad $pais"
 
 fun convertirGrado(temperatura: Double) = "${temperatura.roundToInt()}°"
 
-fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.roundToInt()}%"
+fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.absoluteValue.roundToInt()}%"
 
 fun convertirVelocidad(velocidad: Double) = "$velocidad m/s"
 
@@ -28,7 +29,7 @@ fun convertirFecha(tiempo: Int): String {
     return fecha.format(tiempo*1000L)
 }
 
-fun convertirTempMinMax(tempMin: Double, tempMax: Double) = "${tempMin.roundToInt()}°/${tempMax.roundToInt()}°"
+fun convertirTempMinMax(tempMin: Double, tempMax: Double) = "${convertirGrado(tempMin)}/${convertirGrado(tempMax)}"
 
 fun convertirDia(tiempo: Int): String {
     val calendario = Calendar.getInstance()

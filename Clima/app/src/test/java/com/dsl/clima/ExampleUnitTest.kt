@@ -14,11 +14,4 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-
-    @Test
-    fun clima_build() {
-        val ciudad = Ciudad()
-        assertEquals(ciudad.nombre, "")
-        assertEquals(ciudad.clima[0].descripcion, "")
-    }
 }
