@@ -59,6 +59,12 @@ interface PronosticoService {
                   @Query("lang") idioma: String = LANGUAGE,
                   @Query("appid") apiKey: String = API_KEY): Deferred<CiudadRemote>
 
+    @GET("weather")
+    fun getCiudad(@Query("lat") latitudCiudad: Double = 0.0,
+                  @Query("lon") longitudCiudad: Double = 0.0,
+                  @Query("lang") idioma: String = LANGUAGE,
+                  @Query("appid") apiKey: String = API_KEY): Deferred<CiudadRemote>
+
     @GET("find")
     fun getListaCiudad(@Query("q") nombreCiudad: String = "Cordoba",
                   @Query("lang") idioma: String = LANGUAGE,

@@ -12,14 +12,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PronosticoRepository(private val dataLocal: PronosticoDatabaseDao) {
-    suspend fun refrescarPronostico(idCiudad: Int): PronosticoModel {
+    suspend fun refrescarPronostico(idCiudad: Int, latitudCiudad: Double, longitudCiudad: Double): PronosticoModel {
         var pronosticoModel = PronosticoModel()
         withContext(Dispatchers.IO) {
-            val ciudadRemote = apiService.retrofitService.getCiudad(idCiudad).await()
+            var ciudadRemote: CiudadRemote
+
+            if(idCiudad!=-1) {
+                ciudadRemote = apiService.retrofitService.getCiudad(idCiudad).await()
+            }
+            else {
+                ciudadRemote = apiService.retrofitService.getCiudad(latitudCiudad, longitudCiudad).await()
+            }
+
             val pronosticoRemote = apiService.retrofitService.getPronostico(ciudadRemote.coordenadaCiudad.latitud, ciudadRemote.coordenadaCiudad.longitud).await()
             pronosticoModel = transformarPronosticoRemoteModel(ciudadRemote, pronosticoRemote)
             val pronosticoLocal = transformarPronosticoModelLocal(pronosticoModel)
-            dataLocal.actualizarPronosticoLocal(pronosticoLocal)
+            //dataLocal.actualizarPronosticoLocal(pronosticoLocal)
+            dataLocal.insertarPronosticoLocal(pronosticoLocal)
         }
         return pronosticoModel
     }
