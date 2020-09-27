@@ -8,28 +8,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.service.ServicioLocalizacion
+import com.dsl.clima.util.EstadoLocalizacion
 
 class MainViewModel(private val context: Context) : ViewModel() {
-    private val _estadoLocalizacion = MutableLiveData<Boolean>()
-    val estadoLocalizacion: LiveData<Boolean>
-        get() = _estadoLocalizacion
-
-    private var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
+    var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
 
     init {
-        chequearProviderLocalizacion()
+        chequearPermisoLocalizacion()
+    }
+
+    fun chequearPermisoLocalizacion() {
+        servicioLocalizacion.chequearPermiso()
     }
 
     fun chequearProviderLocalizacion() {
-        if(servicioLocalizacion.chequearPermiso()) {
-
-        }
-        else {
-            _estadoLocalizacion.value = servicioLocalizacion.chequearProviders()
-        }
+        servicioLocalizacion.chequearProviders()
     }
 
-    fun getLocalizacion() {
-        servicioLocalizacion.getLocalizacion()
+    override fun onCleared() {
+        super.onCleared()
+        servicioLocalizacion.removerActualizacionLocalizacion()
     }
 }

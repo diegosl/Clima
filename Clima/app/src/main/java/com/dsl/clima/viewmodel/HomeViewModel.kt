@@ -8,6 +8,7 @@ import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.domain.model.PronosticoModel
 import com.dsl.clima.service.ServicioLocalizacion
 import com.dsl.clima.util.EstadoApi
+import com.dsl.clima.util.EstadoLocalizacion
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,7 +27,7 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
     val estadoApi: LiveData<EstadoApi>
         get() = _estadoApi
 
-    private var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
+    var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
 
     private val _estadoGPS = MutableLiveData<Boolean>()
     val estadoGPS: LiveData<Boolean>
@@ -36,12 +37,7 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        if(servicioLocalizacion.chequearProviders()) {
-            refescarPronostico()
-        }
-        else {
-            _pronosticoModel.value = PronosticoModel()
-        }
+        servicioLocalizacion.chequearProviders()
     }
 
     fun refescarPronostico() {
@@ -50,8 +46,8 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
                 if (idCiudad == -1) {
                     _estadoApi.value = EstadoApi.CARGANDO
                     _estadoGPS.value = true
-                    servicioLocalizacion.getLocalizacion()
-                    _pronosticoModel.value = pronosticoRepository.refrescarPronostico(servicioLocalizacion.latitud, servicioLocalizacion.longitud)
+                    val coordenadas = servicioLocalizacion.getCoordenadas()
+                    _pronosticoModel.value = pronosticoRepository.refrescarPronostico(coordenadas[0], coordenadas[1])
                     _estadoApi.value = EstadoApi.FINALIZADO
                 } else {
                     _estadoApi.value = EstadoApi.CARGANDO
@@ -63,7 +59,12 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
             catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
                 _estadoGPS.value = false
-                _pronosticoModel.value = pronosticoRepository.getPronostico(idCiudad)
+                try {
+                    _pronosticoModel.value = pronosticoRepository.getPronostico(idCiudad)
+                }
+                catch(e: Exception) {
+                    _pronosticoModel.value = PronosticoModel()
+                }
             }
         }
     }

@@ -16,6 +16,8 @@ import kotlin.math.roundToInt
 
 enum class EstadoApi { CARGANDO, ERROR, FINALIZADO }
 
+enum class EstadoLocalizacion { PERMISO_DENEGADO, PERMISO_APROBADO, PROVEDOR_DENEGADO, PROVEDOR_APROBADO }
+
 fun unirCiudadPais(ciudad: String, pais: String) = "$ciudad $pais"
 
 fun convertirGrado(temperatura: Double) = "${temperatura.roundToInt()}°"

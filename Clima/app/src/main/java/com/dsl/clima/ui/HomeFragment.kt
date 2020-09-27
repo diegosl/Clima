@@ -1,11 +1,15 @@
 package com.dsl.clima.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,9 +18,12 @@ import com.dsl.clima.adapter.PronosticoExtendidoAdapter
 import com.dsl.clima.databinding.FragmentHomeBinding
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.data.source.local.PronosticoDatabase.Companion.getDatebase
+import com.dsl.clima.util.EstadoLocalizacion
 import com.dsl.clima.util.efectoShimmer
+import com.dsl.clima.util.mostrarSnackBar
 import com.dsl.clima.viewmodel.HomeViewModel
 import com.dsl.clima.viewmodel.HomeViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 
 class HomeFragment : Fragment() {
@@ -69,6 +76,18 @@ class HomeFragment : Fragment() {
                 }
                 false -> {
                     binding.iconoUbicacion.setColorFilter(ContextCompat.getColor(this.context!!, R.color.colorWhite))
+                }
+            }
+        })
+
+        viewModel.servicioLocalizacion.estadoLocalizacion.observe(this, Observer {
+            when(it) {
+                EstadoLocalizacion.PROVEDOR_DENEGADO -> {
+                    mostrarSnackBar(binding.recyclerViewPronosticoExtendido, "Servicio de localizacion desactivado")
+                }
+                EstadoLocalizacion.PROVEDOR_APROBADO -> {
+                    viewModel.refescarPronostico()
+                    mostrarSnackBar(binding.recyclerViewPronosticoExtendido, "Servicio de localizacion activado")
                 }
             }
         })
