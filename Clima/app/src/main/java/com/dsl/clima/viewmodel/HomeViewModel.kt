@@ -1,18 +1,12 @@
 package com.dsl.clima.viewmodel
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
-import android.os.Bundle
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.domain.model.PronosticoModel
+import com.dsl.clima.service.ServicioLocalizacion
 import com.dsl.clima.util.EstadoApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,67 +26,43 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
     val estadoApi: LiveData<EstadoApi>
         get() = _estadoApi
 
-    private val _estadoLocalizacion = MutableLiveData<Boolean>()
-    val estadoLocalizacion: LiveData<Boolean>
-        get() = _estadoLocalizacion
+    private var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
 
-    private var latitud: Double
-    private var longitud: Double
-
-    private lateinit var locationManager: LocationManager
-    private val locationListener = object : LocationListener {
-        override fun onLocationChanged(location: Location) {
-            latitud = location.latitude
-            longitud = location.longitude
-        }
-        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
-        override fun onProviderEnabled(provider: String) {
-            _estadoLocalizacion.value = true
-        }
-        override fun onProviderDisabled(provider: String) {
-            _estadoLocalizacion.value = false
-        }
-    }
+    private val _estadoGPS = MutableLiveData<Boolean>()
+    val estadoGPS: LiveData<Boolean>
+        get() = _estadoGPS
 
     /**
      * Inicializa el modelo de vista viewModel.
      */
     init {
-        latitud = 0.0
-        longitud = 0.0
-        refescarPronostico()
+        if(servicioLocalizacion.chequearProviders()) {
+            refescarPronostico()
+        }
+        else {
+            _pronosticoModel.value = PronosticoModel()
+        }
     }
 
     fun refescarPronostico() {
         coroutineScope.launch {
             try {
-                _estadoApi.value = EstadoApi.CARGANDO
-                locationManager = context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-                if (ActivityCompat.checkSelfPermission(context!!.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(context!!.applicationContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    //_estadoLocalizacion.value = true
-                }
-                else {
-                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        _estadoLocalizacion.value = false
-                    }
-                    else {
-                        val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                        if(location != null) {
-                            latitud = location.latitude
-                            longitud = location.longitude
-                        }
-
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 0f, locationListener)
-
-                        _pronosticoModel.value = pronosticoRepository.refrescarPronostico(idCiudad, latitud, longitud)
-                        _estadoApi.value = EstadoApi.FINALIZADO
-                    }
+                if (idCiudad == -1) {
+                    _estadoApi.value = EstadoApi.CARGANDO
+                    _estadoGPS.value = true
+                    servicioLocalizacion.getLocalizacion()
+                    _pronosticoModel.value = pronosticoRepository.refrescarPronostico(servicioLocalizacion.latitud, servicioLocalizacion.longitud)
+                    _estadoApi.value = EstadoApi.FINALIZADO
+                } else {
+                    _estadoApi.value = EstadoApi.CARGANDO
+                    _estadoGPS.value = false
+                    _pronosticoModel.value = pronosticoRepository.refrescarPronostico(idCiudad)
+                    _estadoApi.value = EstadoApi.FINALIZADO
                 }
             }
             catch (e: Exception) {
                 _estadoApi.value = EstadoApi.ERROR
+                _estadoGPS.value = false
                 _pronosticoModel.value = pronosticoRepository.getPronostico(idCiudad)
             }
         }
@@ -105,7 +75,6 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
      */
     override fun onCleared() {
         super.onCleared()
-        //locationManager.removeUpdates(locationListener)
         viewModelJob.cancel()
     }
 }
