@@ -26,17 +26,23 @@ fun convertirPorcentaje(porcentaje: Double) = "${porcentaje.absoluteValue.roundT
 
 fun convertirVelocidad(velocidad: Double) = "$velocidad m/s"
 
-fun convertirFecha(tiempo: Int): String {
+fun convertirFecha(tiempo: Int) = if(tiempo == 0) {
+    "--/--/---- --:--:-- --"
+}
+else {
     val fecha = SimpleDateFormat("dd/MM/yyyy hh:mm:ss a")
-    return fecha.format(tiempo*1000L)
+    fecha.format(tiempo*1000L)
 }
 
 fun convertirTempMinMax(tempMin: Double, tempMax: Double) = "${convertirGrado(tempMin)}/${convertirGrado(tempMax)}"
 
-fun convertirDia(tiempo: Int): String {
+fun convertirDia(tiempo: Int) = if(tiempo == 0) {
+    "--"
+}
+else {
     val calendario = Calendar.getInstance()
     calendario.timeInMillis = tiempo * 1000L
-    return when(calendario.get(Calendar.DAY_OF_WEEK)) {
+    when(calendario.get(Calendar.DAY_OF_WEEK)) {
         Calendar.SUNDAY -> "Domingo"
         Calendar.MONDAY -> "Lunes"
         Calendar.TUESDAY -> "Martes"
@@ -47,8 +53,6 @@ fun convertirDia(tiempo: Int): String {
         else -> ""
     }
 }
-
-fun convertirCodigoNombrePais(codigoPais: String) = Locale(codigoPais).country
 
 @SuppressLint("ResourceAsColor")
 fun efectoShimmer(estadoApi: EstadoApi, shimmerView: ShimmerFrameLayout, view: View, swipeRefreshLayout: SwipeRefreshLayout, mensaje: String) {

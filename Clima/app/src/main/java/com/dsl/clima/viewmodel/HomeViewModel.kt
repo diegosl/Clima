@@ -6,7 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dsl.clima.data.repository.PronosticoRepository
 import com.dsl.clima.domain.model.PronosticoModel
-import com.dsl.clima.service.ServicioLocalizacion
+import com.dsl.clima.service.chequearProviders
+import com.dsl.clima.service.estadoLocalizacion
+import com.dsl.clima.service.getUserLocation
+import com.dsl.clima.service.locationObs
 import com.dsl.clima.util.EstadoApi
 import com.dsl.clima.util.EstadoLocalizacion
 import kotlinx.coroutines.CoroutineScope
@@ -27,17 +30,15 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
     val estadoApi: LiveData<EstadoApi>
         get() = _estadoApi
 
-    var servicioLocalizacion: ServicioLocalizacion = ServicioLocalizacion(context)
-
     private val _estadoGPS = MutableLiveData<Boolean>()
     val estadoGPS: LiveData<Boolean>
         get() = _estadoGPS
 
-    /**
-     * Inicializa el modelo de vista viewModel.
-     */
-    init {
-        servicioLocalizacion.chequearProviders()
+    val estadoUbicacion: LiveData<EstadoLocalizacion>
+        get() = estadoLocalizacion
+
+    fun chequearProviderLocalizacion() {
+        chequearProviders(context)
     }
 
     fun refescarPronostico() {
@@ -46,8 +47,15 @@ class HomeViewModel(private val context: Context, private val pronosticoReposito
                 if (idCiudad == -1) {
                     _estadoApi.value = EstadoApi.CARGANDO
                     _estadoGPS.value = true
-                    val coordenadas = servicioLocalizacion.getCoordenadas()
-                    _pronosticoModel.value = pronosticoRepository.refrescarPronostico(coordenadas[0], coordenadas[1])
+                    getUserLocation(context)
+                    _pronosticoModel.value = locationObs.value?.latitude?.let {
+                        locationObs.value?.longitude?.let { it1 ->
+                            pronosticoRepository.refrescarPronostico(
+                                it,
+                                it1
+                            )
+                        }
+                    }
                     _estadoApi.value = EstadoApi.FINALIZADO
                 } else {
                     _estadoApi.value = EstadoApi.CARGANDO

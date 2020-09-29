@@ -5,6 +5,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.dsl.clima.R
 import com.dsl.clima.domain.model.CiudadModel
 import com.dsl.clima.domain.model.PronosticoDiarioModel
 import com.dsl.clima.domain.model.PronosticoModel
@@ -66,5 +68,5 @@ fun bindConvertirDia(text: TextView, tiempo: Int) {
 @BindingAdapter("imageUrl")
 fun bindImageUrl(imgView: ImageView, imgUrl: String?) {
     val imgUri = "http://openweathermap.org/img/wn/${imgUrl}@2x.png"
-    Glide.with(imgView).load(imgUri).into(imgView)
+    Glide.with(imgView).load(imgUri).apply(RequestOptions().error(R.drawable.ic_error_imagen)).into(imgView)
 }
